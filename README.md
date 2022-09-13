@@ -23,10 +23,6 @@ Will be here soon :)
    ```sh
    npm run start
    ```
-4. Run the backend part of the application in a development mode 
-   ```sh
-   npm run dev
-   ```
 
 ## Stack: 
 
