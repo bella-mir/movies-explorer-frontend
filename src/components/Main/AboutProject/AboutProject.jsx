@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./aboutProject.module.scss";
+import { Section, Title } from "../Elements";
 
 export const AboutProject = () => {
   return (
-    <div className={styles.about}>
-      <h2 className={styles.about__title}>О проекте</h2>
+    <Section>
+      <Title>О проекте</Title>
       <div className={styles.about__content}>
         <div>
           <h3 className={styles.about__contentSubTitle}>
@@ -35,6 +36,6 @@ export const AboutProject = () => {
           <div className={styles.about__timelineSign}>Front-end</div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 };

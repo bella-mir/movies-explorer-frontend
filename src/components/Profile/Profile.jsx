@@ -1,10 +1,11 @@
 import React from "react";
+import { Section, Title } from "../Main/Elements";
 import styles from "./profile.module.scss";
 
 export const Profile = () => {
   return (
-    <div className={styles.profile}>
-      <h2 className={styles.profile__title}>Cтудент</h2>
+<Section>
+      <Title>Cтудент</Title>
       <div className={styles.profile__content}>
         <div className={styles.profile__information}>
           <div className={styles.profile__text}>
@@ -28,21 +29,21 @@ export const Profile = () => {
       </div>
       <div className={styles.profile__portfolio}>
       <h4 className={styles.profile__subtitle}>Портфолио</h4>
-      <a className={styles.profile__projectLink} href="#">
+      <a className={styles.profile__projectLink} href="https://belka-mironova.github.io/how-to-learn/" target="_blank">
         <span className={styles.profile__projectTitle}>Статичный сайт</span>
         <div className={styles.profile__arrowLink}></div>
       </a>
-      <a className={styles.profile__projectLink} href="#">
+      <a className={styles.profile__projectLink} href="https://belka-mironova.github.io/russian-travel/" target="_blank">
         <span className={styles.profile__projectTitle}>Адаптивный сайт</span>
         <div className={styles.profile__arrowLink}></div>
       </a>
-      <a className={styles.profile__projectLink} href="#">
+      <a className={styles.profile__projectLink} href="https://mesto.bellamir.nomoredomains.sbs/sign-in" target="_blank">
         <span className={styles.profile__projectTitle}>Одностраничное приложение</span>
         <div className={styles.profile__arrowLink}></div>
       </a>
 
 
       </div>
-    </div>
+      </Section>
   );
 };
