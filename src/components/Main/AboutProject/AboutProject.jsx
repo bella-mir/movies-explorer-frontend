@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./aboutProject.module.scss";
-import { Section, Title } from "../Elements";
+import { Section, Title } from "../../Elements";
 
 export const AboutProject = () => {
   return (
