@@ -1,5 +1,5 @@
 import React from "react";
-import { Section } from "../Elements";
+import { Section } from "../../Elements";
 import styles from "./portfolio.module.scss";
 
 export const Portfolio = () => {

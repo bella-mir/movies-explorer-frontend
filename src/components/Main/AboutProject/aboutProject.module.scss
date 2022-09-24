@@ -31,7 +31,7 @@
   margin: 0;
 }
 .about__timelineGroup {
-  max-width: 1140;
+  max-width: 1140px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,16 @@
   align-items: center;
 }
 
+.about__timelineGroup:first-of-type {
+  flex-basis: 20%;
+}
+
+.about__timelineGroup:last-of-type {
+  flex-basis: 80%;
+}
+
 .about__timelineBack {
+  width: 100%;
   max-width: 228px;
   height: 36px;
   background-color: #3456f3;
@@ -49,6 +58,7 @@
 }
 
 .about__timelineFront {
+  width: 100%;
   max-width: 912px;
   height: 36px;
   font-size: 14px;
