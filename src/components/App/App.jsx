@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Main } from "../Main";
-import { Movies}  from "../Movies";
+import { Movies } from "../Movies";
 import { Routes, Route } from "react-router-dom";
 
 import styles from "./app.module.scss";
 
 function App() {
+  const [windowPath, setWindowPath] = useState(window.location.pathname);
+  useEffect(() => {
+    setWindowPath(window.location.pathname);
+  }, []);
+
   return (
     <div className={styles.page}>
-      <Header />
+      {windowPath === "/" ? <Header backgroundColor={"#dddee3"} /> : <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />

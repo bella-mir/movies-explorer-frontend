@@ -1,0 +1,54 @@
+.form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.search {
+  border: none;
+  padding-bottom: 13px;
+  width: 100%;
+  font-size: 28px;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+.search__button {
+  height: 34px;
+  width: 80px;
+  background-color: #3456f3;
+  border: none;
+  border-radius: 30px;
+  background-image: url("../../../images/find_icon.svg");
+  background-size: fit;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.search__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.filter {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+}
+
+.tumbler {
+  background-image: url("../../../images/tumb.svg");
+  height: 20px;
+  width: 36px;
+}
+
+.condition {
+  font-size: 13px;
+  line-height: 20px;
+}
