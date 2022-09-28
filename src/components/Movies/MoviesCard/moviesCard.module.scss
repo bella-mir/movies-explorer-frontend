@@ -1,0 +1,49 @@
+.card {
+  height: 218px;
+  width: 270px;
+  border-radius: 10px;
+  box-shadow: 0px 16px 24px 0px rgba(0, 0, 0, 0.05);
+}
+
+.card__picture {
+  height: 151px;
+  width: 270px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.card__header {
+  margin: 14px 12px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.card__duration {
+  margin: 0 12px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #A0A0A0;
+}
+
+
+.card__saved{
+    background-image: url("../../../images/short_movie.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+}
+
+
+
+
+
