@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./techs.module.scss";
-import { Section, Title } from "../../Elements";
+import { Section, Title } from "../../General";
 
 export const Techs = () => {
   return (

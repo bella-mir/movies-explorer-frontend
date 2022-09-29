@@ -1,7 +1,7 @@
 import React from "react";
-import { Section, Title } from "../../Elements";
+import { Section, Title } from "../../General";
 import styles from "./aboutMe.module.scss";
-import photo from "../../../images/myphoto.jpeg"
+import photo from "../../../images/myphoto.jpeg";
 
 export const AboutMe = () => {
   return (
@@ -15,8 +15,8 @@ export const AboutMe = () => {
               Фронтенд-разработчик, 24 года
             </p>
             <p className={styles.profile__description}>
-              Я родилась в Братске, живу в Москве. Не знаю, чем хочу заниматься,
-              но очень нравится фронт-енд.
+              Я занимаюсь городскими исследованиями, аналитикой городских
+              пространстыенных данных и фронтент разработкой веб-гис приложений.
             </p>
           </div>
           <a
@@ -26,7 +26,7 @@ export const AboutMe = () => {
             Github
           </a>
         </div>
-        <img src={photo} className={styles.profile__photo}/>
+        <img src={photo} className={styles.profile__photo} />
       </div>
     </Section>
   );

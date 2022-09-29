@@ -1,5 +1,5 @@
 import React from "react";
-import { Section } from "../../Elements";
+import { Section } from "../../General";
 import styles from "./searchForm.module.scss";
 
 export const SearchForm = () => {

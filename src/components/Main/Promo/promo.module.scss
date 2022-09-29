@@ -28,10 +28,12 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-    height: 36px;
-    width: 130px;
+    min-height: 36px;
+    min-width: 130px;
     border: 1px solid #000000;
     border-radius: 3px;
+    text-decoration: none;
+    color: black;
   }
 
   .promo__button:hover {
@@ -82,7 +84,7 @@
       line-height: 38px;
     }
     .promo__subtitle {
-        margin: 24px auto 80px;
-      }
+      margin: 24px auto 80px;
+    }
   }
 }

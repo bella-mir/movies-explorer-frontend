@@ -1,5 +1,5 @@
 import React from "react";
-import { Section } from "../../Elements";
+import { Section } from "../../General";
 import { MoviesCard } from "../MoviesCard/MoviesCard";
 import styles from "./moviesCardList.module.scss";
 

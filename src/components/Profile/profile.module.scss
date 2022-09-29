@@ -1,0 +1,50 @@
+.greeting {
+  text-align: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin-bottom: 120px;
+}
+
+.data {
+  width: 410px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.data:first-of-type {
+  border-bottom: 1px #e8e8e8 solid;
+}
+
+.editing {
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0 0 16px;
+}
+
+.bottom {
+  margin-top: 210px;
+  text-align: center;
+}
+
+.logout {
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #ee3465;
+}
+
+.logout:hover {
+  opacity: 0.7;
+}
