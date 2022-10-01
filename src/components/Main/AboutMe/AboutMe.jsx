@@ -5,22 +5,22 @@ import photo from "../../../images/myphoto.jpeg";
 
 export const AboutMe = () => {
   return (
-    <Section className={styles.profile}>
+    <Section className={styles.about}>
       <Title>Cтудент</Title>
-      <div className={styles.profile__content}>
-        <div className={styles.profile__information}>
-          <div className={styles.profile__text}>
-            <h3 className={styles.profile__name}>Белла</h3>
-            <p className={styles.profile__occupation}>
+      <div className={styles.about__content}>
+        <div className={styles.about__information}>
+          <div className={styles.about__text}>
+            <h3 className={styles.about__name}>Белла</h3>
+            <p className={styles.about__occupation}>
               Фронтенд-разработчик, 24 года
             </p>
-            <p className={styles.profile__description}>
+            <p className={styles.about__description}>
               Я занимаюсь городскими исследованиями, аналитикой городских
               пространстыенных данных и фронтент разработкой веб-гис приложений.
             </p>
           </div>
           <a
-            className={styles.profile__link}
+            className={styles.about__link}
             href="https://github.com/belka-mironova"
           >
             Github
@@ -28,7 +28,7 @@ export const AboutMe = () => {
         </div>
         <img
           src={photo}
-          className={styles.profile__photo}
+          className={styles.about__photo}
           alt="BellaS face"
         />
       </div>

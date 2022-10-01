@@ -5,21 +5,21 @@ import styles from "./profile.module.scss";
 
 export const Profile = () => {
   return (
-    <Section>
-      <h2 className={styles.greeting}>Привет, Виталий!</h2>
-      <div className={styles.data}>
-        <p className={styles.info}>Имя</p>
-        <p className={styles.info}>Виталий</p>
+    <Section className={styles.profile}>
+      <h2 className={styles.profile__greeting}>Привет, Виталий!</h2>
+      <div className={styles.profile__data}>
+        <p className={styles.profile__info}>Имя</p>
+        <p className={styles.profile__info}>Виталий</p>
       </div>
-      <div className={styles.data}>
-        <p className={styles.info}>Почта</p>
-        <p className={styles.info}>pochta@yandex.ru</p>
+      <div className={styles.profile__data}>
+        <p className={styles.profile__info}>Почта</p>
+        <p className={styles.profile__info}>pochta@yandex.ru</p>
       </div>
 
-      <div className={styles.bottom}>
-        <button className={styles.editing}>Редактировать</button>
+      <div className={styles.profile__bottom}>
+        <button className={styles.profile__editing}>Редактировать</button>
 
-        <Link className={styles.logout} to="/signin">
+        <Link className={styles.profile__logout} to="/signin">
           Выйти из аккаунта
         </Link>
       </div>

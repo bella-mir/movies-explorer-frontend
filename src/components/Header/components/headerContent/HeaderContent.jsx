@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./header-content.module.scss";
-import useWindowSize from "../../../hooks/useWindowSize";
-import { HamburgerMenu } from "./HamburgerMenu";
+import useWindowSize from "../../../../hooks/useWindowSize";
+import { HamburgerMenu } from "../hamburgerMenu/HamburgerMenu";
 
 export const HeaderContent = () => {
   const size = useWindowSize();
 
   return (
     <>
-      {size.width < 600 ? (
+      {size.width < 820 ? (
         <HamburgerMenu />
       ) : (
         <div className={styles.header__menu}>

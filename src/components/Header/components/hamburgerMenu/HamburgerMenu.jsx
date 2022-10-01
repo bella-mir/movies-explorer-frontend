@@ -19,8 +19,12 @@ export const HamburgerMenu = () => {
   };
 
   return (
-    <div className={styles.menuToggle} style={{ position: buttonPosition }}>
+    <div
+      className={styles.burger__menuToggle}
+      style={{ position: buttonPosition }}
+    >
       <input
+        className={styles.burger__input}
         type="checkbox"
         value={isOpened}
         onChange={handleChange}
@@ -29,7 +33,7 @@ export const HamburgerMenu = () => {
       <span></span>
       <span></span>
       <span></span>
-      <ul className={styles.menu}>
+      <ul className={styles.burger__menu}>
         <div className={styles.burger__menublock}>
           <Link className={styles.burger__menuLink} to="/">
             Главная

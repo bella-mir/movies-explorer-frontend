@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./header-menu.module.scss";
-import { HeaderContent } from "./HeaderContent";
+import { HeaderContent } from "../headerContent/HeaderContent";
 
 export const HeaderMenu = (props) => {
   return (

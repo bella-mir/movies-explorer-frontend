@@ -9,7 +9,7 @@ export const Main = () => {
   return (
     <>
       <Promo />
-      <AboutProject/>
+      <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />

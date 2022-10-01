@@ -5,19 +5,19 @@ import styles from "./form.module.scss";
 
 export const Form = (props) => {
   return (
-    <Section className={styles.body}>
-      <div className={styles.content}>
+    <Section className={styles.form__body}>
+      <div className={styles.form__content}>
         <Link to="/">
-          <div className={styles.logo}></div>
+          <div className={styles.form__logo}></div>
         </Link>
-        <h2 className={styles.greeting}>{props.greeting}</h2>
-        <form className={styles.form}>
+        <h2 className={styles.form__greeting}>{props.greeting}</h2>
+        <form className={styles.form__form}>
           {props.children}
-          <button className={styles.submit}>{props.submit}</button>
+          <button className={styles.form__submit}>{props.submit}</button>
         </form>
-        <div className={styles.info}>
-          <p className={styles.question}>{props.question}</p>
-          <Link className={styles.link} to={props.href}>
+        <div className={styles.form__info}>
+          <p className={styles.form__question}>{props.question}</p>
+          <Link className={styles.form__link} to={props.href}>
             {props.link}
           </Link>
         </div>

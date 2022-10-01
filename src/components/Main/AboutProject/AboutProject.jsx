@@ -4,9 +4,9 @@ import { Section, Title } from "../../General";
 
 export const AboutProject = () => {
   return (
-    <Section className={styles.about} >
+    <Section className={styles.about}>
       <Title>О проекте</Title>
-      <div className={styles.about__content} id='#about'>
+      <div className={styles.about__content} id="about">
         <div>
           <h3 className={styles.about__contentSubTitle}>
             Дипломный проект включал 5 этапов

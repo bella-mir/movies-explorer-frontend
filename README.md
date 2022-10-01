@@ -30,3 +30,6 @@ Front-end:
 * JavaScript 
 * React.js
 
+## Design Brief in Figma: 
+
+* [Brief](https://disk.yandex.com/d/BVrwqz4j8KsnQg) 

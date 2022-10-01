@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { HeaderMenu } from "./components/HeaderMenu";
+import { HeaderMenu } from "./components/headerMenu/HeaderMenu";
 import styles from "./header.module.scss";
 
 export const Header = () => {

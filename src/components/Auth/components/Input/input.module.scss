@@ -1,4 +1,4 @@
-.label {
+.input__label {
   display: flex;
   flex-direction: column;
   font-weight: 400;
@@ -8,19 +8,26 @@
   margin-top: 20px;
 }
 
-.input {
+.input__input {
   margin-top: 10px;
   height: 46px;
   background-color: #f4f4f4;
   border: none;
   border-radius: 8px;
-  /* text__COLOR:font-main */
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
   padding-left: 2px;
 }
 
-.input:focus {
+.input__input:focus {
   outline: none;
+}
+
+.input__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  margin-top: 10px;
 }
