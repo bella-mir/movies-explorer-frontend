@@ -28,12 +28,21 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  margin: 0 0 16px;
+  border: none;
+  background-color: transparent;
+}
+
+.editing:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .bottom {
   margin-top: 210px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .logout {

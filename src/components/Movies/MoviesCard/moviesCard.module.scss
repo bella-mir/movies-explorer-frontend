@@ -31,19 +31,63 @@
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
-  color: #A0A0A0;
+  color: #a0a0a0;
 }
 
-
-.card__saved{
-    background-image: url("../../../images/short_movie.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 16px;
-    height: 16px;
+.card__saved {
+  background-image: url("../../../images/short_movie.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
 }
 
+.card__unsaved {
+  background-image: url("../../../images/long_movie.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+}
 
+.card__delete {
+  background-image: url("../../../images/close.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+}
 
+.card__delete:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
 
+@media (max-width: 820px) {
+  .card {
+    height: 257px;
+    width: 340px;
+    border-radius: 10px;
+    box-shadow: 0px 16px 24px 0px rgba(0, 0, 0, 0.05);
+  }
 
+  .card__picture {
+    height: 190px;
+    width: 340px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 550px) {
+  .card {
+    height: 235px;
+    width: 300px;
+  }
+
+  .card__picture {
+    height: 168px;
+    width: 300px;
+  }
+}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { HeaderContent } from "./components/HeaderContent";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { HeaderMenu } from "./components/HeaderMenu";
 import styles from "./header.module.scss";
 
 export const Header = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
           path={path}
           element={
             <div className={styles.header}>
-              <HeaderContent main={true} />
+              <HeaderMenu main={true} />
             </div>
           }
         />
@@ -22,7 +22,7 @@ export const Header = () => {
         path="/"
         element={
           <div className={styles.header} style={{ backgroundColor: "#dddee3" }}>
-            <HeaderContent />
+            <HeaderMenu />
           </div>
         }
       ></Route>

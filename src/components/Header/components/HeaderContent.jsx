@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./header-content.module.scss";
+import useWindowSize from "../../../hooks/useWindowSize";
+import { HamburgerMenu } from "./HamburgerMenu";
 
-export const HeaderContent = (props) => {
+export const HeaderContent = () => {
+  const size = useWindowSize();
+
   return (
     <>
-      <Link to="/">
-        <div className={styles.header__logo}></div>
-      </Link>
-
-      {props.main ? (
+      {size.width < 600 ? (
+        <HamburgerMenu />
+      ) : (
         <div className={styles.header__menu}>
           <Link className={styles.header__menuLink} to="/movies">
             Фильмы
@@ -19,15 +21,6 @@ export const HeaderContent = (props) => {
           </Link>
           <Link className={styles.header__menuLink} to="/profile">
             <button className={styles.header__button_biege}>Аккаунт</button>
-          </Link>
-        </div>
-      ) : (
-        <div className={styles.header__menu}>
-          <Link className={styles.header__menuLink} to="/signup">
-            Регистрация
-          </Link>
-          <Link className={styles.header__menuLink} to="/signin">
-            <button className={styles.header__button}> Войти</button>
           </Link>
         </div>
       )}

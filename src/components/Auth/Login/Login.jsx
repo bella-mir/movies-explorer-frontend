@@ -9,6 +9,7 @@ export const Login = () => {
       submit={"Войти"}
       question={"Еще не зарегестрированы?"}
       link={"Регистрация"}
+      href={"/signup"}
     >
       <Input label={"Email"} />
       <Input label={"Пароль"} />

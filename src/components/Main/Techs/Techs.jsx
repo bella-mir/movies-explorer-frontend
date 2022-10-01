@@ -4,7 +4,7 @@ import { Section, Title } from "../../General";
 
 export const Techs = () => {
   return (
-    <Section>
+    <Section className={styles.techs}>
       <Title>Технологии</Title>
       <div className={styles.techs__content}>
         <h3 className={styles.techs__main}>7 технологий</h3>

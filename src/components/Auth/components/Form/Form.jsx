@@ -5,8 +5,8 @@ import styles from "./form.module.scss";
 
 export const Form = (props) => {
   return (
-    <Section>
-      <div className={styles.body}>
+    <Section className={styles.body}>
+      <div className={styles.content}>
         <Link to="/">
           <div className={styles.logo}></div>
         </Link>
@@ -17,7 +17,7 @@ export const Form = (props) => {
         </form>
         <div className={styles.info}>
           <p className={styles.question}>{props.question}</p>
-          <Link className={styles.link} to="/signup">
+          <Link className={styles.link} to={props.href}>
             {props.link}
           </Link>
         </div>

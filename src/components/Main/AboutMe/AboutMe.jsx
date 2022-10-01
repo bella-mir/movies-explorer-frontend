@@ -5,7 +5,7 @@ import photo from "../../../images/myphoto.jpeg";
 
 export const AboutMe = () => {
   return (
-    <Section>
+    <Section className={styles.profile}>
       <Title>Cтудент</Title>
       <div className={styles.profile__content}>
         <div className={styles.profile__information}>
@@ -26,7 +26,11 @@ export const AboutMe = () => {
             Github
           </a>
         </div>
-        <img src={photo} className={styles.profile__photo} />
+        <img
+          src={photo}
+          className={styles.profile__photo}
+          alt="BellaS face"
+        />
       </div>
     </Section>
   );

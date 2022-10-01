@@ -1,6 +1,16 @@
 .body {
   width: 396px;
-  margin: 0 auto;
+  padding: 0;
+  height: 100vh;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content {
+  width: 100%;
 }
 
 .logo {
@@ -27,6 +37,12 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+  align-self: flex-end;
+}
+
+.submit:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .question {
@@ -55,4 +71,29 @@
   flex-direction: row;
   gap: 6px;
   justify-content: center;
+}
+
+@media (max-width: 550px) {
+  .body {
+    padding: 0;
+  }
+  .content {
+    width: 260px;
+  }
+  .logo {
+    margin: auto;
+  }
+  .greeting {
+    text-align: center;
+  }
+  .submit {
+    margin-top: 160px;
+  }
+  .question {
+    font-size: 12px;
+  }
+
+  .link {
+    font-size: 12px;
+  }
 }

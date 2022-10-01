@@ -4,7 +4,7 @@ import { Section, Title } from "../../General";
 
 export const AboutProject = () => {
   return (
-    <Section >
+    <Section className={styles.about} >
       <Title>О проекте</Title>
       <div className={styles.about__content} id='#about'>
         <div>

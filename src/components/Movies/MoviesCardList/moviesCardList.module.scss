@@ -1,3 +1,8 @@
+.cards {
+  padding-top: 70px;
+  padding-bottom: 80px;
+}
+
 .cardList {
   display: flex;
   flex-direction: row;
@@ -22,4 +27,20 @@
 .button:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+
+@media (max-width: 550px) {
+  .cards {
+    padding-top: 40px;
+  }
+  .cardList {
+    row-gap: 20px;
+  }
+}
+
+@media (max-width: 820px) {
+  .cardList {
+    row-gap: 36px;
+    column-gap: 30px;
+  }
 }

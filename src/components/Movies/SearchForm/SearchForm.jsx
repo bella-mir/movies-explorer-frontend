@@ -1,10 +1,11 @@
 import React from "react";
 import { Section } from "../../General";
+import ToggleSwitch from "../../General/ToggleSwitch/ToggleSwitch";
 import styles from "./searchForm.module.scss";
 
 export const SearchForm = () => {
   return (
-    <Section>
+    <Section className={styles.searchblock}>
       <div className={styles.form}>
         <input
           type="search"
@@ -16,7 +17,8 @@ export const SearchForm = () => {
       </div>
 
       <div className={styles.filter}>
-        <div className={styles.tumbler}></div>
+       <ToggleSwitch/>
+
         <span className={styles.condition}>Короткометражки</span>
       </div>
     </Section>
