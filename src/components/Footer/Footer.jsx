@@ -9,7 +9,7 @@ export const Footer = () => {
         <Route
           path={path}
           element={
-            <div className={styles.footer}>
+            <footer className={styles.footer}>
               <div className={styles.footer__info}>
                 Учебный проект Яндекс.Практикум х BeatFilm.
               </div>
@@ -34,7 +34,7 @@ export const Footer = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </footer>
           }
         />
       ))}

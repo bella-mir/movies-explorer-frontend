@@ -10,9 +10,9 @@ export const Header = () => {
         <Route
           path={path}
           element={
-            <div className={styles.header}>
+            <header className={styles.header}>
               <HeaderMenu main={true} />
-            </div>
+            </header>
           }
         />
       ))}
@@ -21,9 +21,9 @@ export const Header = () => {
         exact
         path="/"
         element={
-          <div className={styles.header} style={{ backgroundColor: "#dddee3" }}>
+          <header className={styles.header} style={{ backgroundColor: "#dddee3" }}>
             <HeaderMenu />
-          </div>
+          </header>
         }
       ></Route>
     </Routes>

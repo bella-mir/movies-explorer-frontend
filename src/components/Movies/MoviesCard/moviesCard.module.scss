@@ -34,30 +34,31 @@
   color: #a0a0a0;
 }
 
-.card__saved {
-  background-image: url("../../../images/short_movie.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
+.card__button {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  padding: 0;
   width: 16px;
   height: 16px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+.card__saved {
+  background-color: #2be080;
 }
 
 .card__unsaved {
-  background-image: url("../../../images/long_movie.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 16px;
-  height: 16px;
+  background-color: #f4f4f4;
 }
 
 .card__delete {
-  background-image: url("../../../images/close.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 16px;
-  height: 16px;
   border: none;
-  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  background: url("../../../images/close.svg") no-repeat center;
 }
 
 .card__delete:hover {
@@ -70,7 +71,6 @@
     height: 257px;
     width: 340px;
     border-radius: 10px;
-    box-shadow: 0px 16px 24px 0px rgba(0, 0, 0, 0.05);
   }
 
   .card__picture {

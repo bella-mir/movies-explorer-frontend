@@ -74,26 +74,26 @@
 }
 
 @media (max-width: 550px) {
-  .body {
+  .form__body {
     padding: 0;
   }
-  .content {
+  .form__content {
     width: 260px;
   }
-  .logo {
+  .form__logo {
     margin: auto;
   }
-  .greeting {
+  .form__greeting {
     text-align: center;
   }
-  .submit {
+  .form__submit {
     margin-top: 160px;
   }
-  .question {
+  .form__question {
     font-size: 12px;
   }
 
-  .link {
+  .form__link {
     font-size: 12px;
   }
 }

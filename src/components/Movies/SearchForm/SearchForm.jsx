@@ -6,15 +6,16 @@ import styles from "./searchForm.module.scss";
 export const SearchForm = () => {
   return (
     <Section className={styles.search}>
-      <div className={styles.search__form}>
+      <form className={styles.search__form}>
         <input
           type="search"
           name="movie"
           placeholder="Фильм"
           className={styles.search__input}
+          required
         />
         <button className={styles.search__button}></button>
-      </div>
+      </form>
 
       <div className={styles.search__filter}>
         <ToggleSwitch />

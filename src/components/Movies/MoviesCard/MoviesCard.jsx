@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./moviesCard.module.scss";
+import classnames from "classnames";
 
 export const MoviesCard = (props) => {
   return (
@@ -14,11 +15,17 @@ export const MoviesCard = (props) => {
       <div className={styles.card__header}>
         <h3 className={styles.card__title}>33 слова о дизайне</h3>
         {!props.savedMode ? (
-          <div
-            className={props.saved ? styles.card__saved : styles.card__unsaved}
-          ></div>
+          <button
+            className={classnames(
+              styles.card__button,
+              props.saved && styles.card__saved,
+              !props.saved && styles.card__unsaved
+            )}
+          ></button>
         ) : (
-          <button className={styles.card__delete}></button>
+          <button
+            className={classnames(styles.card__button, styles.card__delete)}
+          ></button>
         )}
       </div>
       <p className={styles.card__duration}>1ч42м</p>
