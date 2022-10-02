@@ -1,0 +1,111 @@
+.portfolio__portfolio {
+  margin-bottom: 125px;
+}
+
+.portfolio__title {
+  color: #a0a0a0;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  margin: 0 0 50px;
+}
+
+.portfolio__list {
+  padding:0;
+  list-style: none;
+}
+
+.portfolio__projectLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8e8e8;
+  text-decoration: none;
+  color: black;
+}
+.portfolio__projectLink:hover {
+  opacity: 0.7;
+}
+.portfolio__projectTitle {
+  font-size: 30px;
+  line-height: 50px;
+  margin: 20px 0;
+}
+
+.portfolio__arrowLink {
+  background-image: url("../../../images/arrow.svg");
+  width: 30px;
+  height: auto;
+  background-size: fit;
+  background-repeat: no-repeat;
+  margin-top: 35px;
+}
+
+@media (max-width: 1000px) {
+  .portfolio__content {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 820px) {
+  .portfolio__photo {
+    height: 307px;
+    width: 255px;
+  }
+  .portfolio__projectTitle {
+    font-size: 28px;
+  }
+  .portfolio__portfolio {
+    margin-bottom: 90px;
+  }
+}
+
+@media (max-width: 550px) {
+  .portfolio__content {
+    gap: 40px;
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin: 60px 0 70px;
+  }
+  .portfolio__description {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 20px 0 40px;
+  }
+  .portfolio__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .portfolio__occupation {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 20px 0;
+  }
+  .portfolio__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .portfolio__photo {
+    height: 292px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .portfolio__subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0 40px;
+  }
+  .portfolio__projectTitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .portfolio__arrowLink {
+    width: 18px;
+    height: auto;
+    margin-top: 20px;
+    background-size: fit;
+  }
+  .portfolio__portfolio {
+    margin-bottom: 70px;
+  }
+}

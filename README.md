@@ -23,10 +23,6 @@ Will be here soon :)
    ```sh
    npm run start
    ```
-4. Run the backend part of the application in a development mode 
-   ```sh
-   npm run dev
-   ```
 
 ## Stack: 
 
@@ -34,3 +30,6 @@ Front-end:
 * JavaScript 
 * React.js
 
+## Design Brief in Figma: 
+
+* [Brief](https://disk.yandex.com/d/BVrwqz4j8KsnQg) 

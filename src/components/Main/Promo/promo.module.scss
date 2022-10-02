@@ -1,0 +1,90 @@
+.promo {
+  height: 575px;
+  padding: 70px 75px;
+  background: #dddee3 url("../../../images/globe.svg") no-repeat;
+  background-size: 310px 304px;
+  background-position: right 70px top 75px;
+  box-sizing: border-box;
+
+  .promo__title {
+    max-width: 640px;
+    margin: 0;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 58px;
+  }
+
+  .promo__subtitle {
+    max-width: 310px;
+    margin: 36px 0 146px 0;
+    font-size: 13px;
+    line-height: 16px;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+
+  .promo__button {
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    min-height: 36px;
+    min-width: 130px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    text-decoration: none;
+    color: black;
+  }
+
+  .promo__button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 1100px) {
+  .promo {
+    .promo__title {
+      max-width: 500px;
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .promo {
+    text-align: center;
+    height: auto;
+    background: #dddee3 url("../../../images/globe.svg") no-repeat;
+    background-position: top 140px center;
+    padding: 70px 55px;
+
+    .promo__title {
+      max-width: 640px;
+      margin: 492px auto 0;
+      font-weight: 500;
+      font-size: 50px;
+      line-height: 58px;
+    }
+
+    .promo__subtitle {
+      max-width: 310px;
+      margin: 22px auto 92px;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .promo {
+    background-size: 210px 206px;
+    padding: 70px 30px 30px;
+    background-position: top 70px center;
+    .promo__title {
+      margin: 250px auto 0;
+      font-size: 30px;
+      line-height: 38px;
+    }
+    .promo__subtitle {
+      margin: 24px auto 80px;
+    }
+  }
+}
