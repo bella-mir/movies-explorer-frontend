@@ -18,7 +18,7 @@ export const HeaderMenu = (props) => {
             Регистрация
           </Link>
           <Link className={styles.header__menuLink} to="/signin">
-            <button className={styles.header__button}> Войти</button>
+            <button type="button" className={styles.header__button}> Войти</button>
           </Link>
         </div>
       )}

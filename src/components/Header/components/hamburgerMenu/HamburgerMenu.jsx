@@ -47,7 +47,7 @@ export const HamburgerMenu = () => {
         </div>
         <div className={styles.burger__menublock}>
           <Link className={styles.burger__menuLink} to="/profile">
-            <button className={styles.burger__button_biege}>Аккаунт</button>
+            <button type="button" className={styles.burger__button_biege}>Аккаунт</button>
           </Link>
         </div>
       </ul>

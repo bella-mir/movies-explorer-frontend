@@ -14,7 +14,7 @@ export const SearchForm = () => {
           className={styles.search__input}
           required
         />
-        <button className={styles.search__button}></button>
+        <button className={styles.search__button} type="button"></button>
       </form>
 
       <div className={styles.search__filter}>

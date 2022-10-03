@@ -17,7 +17,7 @@ export const Profile = () => {
       </div>
 
       <div className={styles.profile__bottom}>
-        <button className={styles.profile__editing}>Редактировать</button>
+        <button className={styles.profile__editing} type="button">Редактировать</button>
 
         <Link className={styles.profile__logout} to="/signin">
           Выйти из аккаунта
