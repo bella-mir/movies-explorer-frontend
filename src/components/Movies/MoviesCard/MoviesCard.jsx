@@ -16,6 +16,7 @@ export const MoviesCard = (props) => {
         <h3 className={styles.card__title}>33 слова о дизайне</h3>
         {!props.savedMode ? (
           <button
+            type="button"
             className={classnames(
               styles.card__button,
               props.saved && styles.card__saved,
@@ -24,6 +25,7 @@ export const MoviesCard = (props) => {
           ></button>
         ) : (
           <button
+            type="button"
             className={classnames(styles.card__button, styles.card__delete)}
           ></button>
         )}

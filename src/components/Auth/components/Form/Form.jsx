@@ -13,7 +13,7 @@ export const Form = (props) => {
         <h2 className={styles.form__greeting}>{props.greeting}</h2>
         <form className={styles.form__form}>
           {props.children}
-          <button className={styles.form__submit}>{props.submit}</button>
+          <button type="submit" className={styles.form__submit}>{props.submit}</button>
         </form>
         <div className={styles.form__info}>
           <p className={styles.form__question}>{props.question}</p>

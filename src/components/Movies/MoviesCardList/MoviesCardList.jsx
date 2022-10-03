@@ -6,7 +6,7 @@ export const MoviesCardList = (props) => {
   return (
     <Section className={styles.cards}>
       <div className={styles.cardList}>{props.children}</div>
-      <button className={styles.cardList__button}>Еще</button>
+      <button className={styles.cardList__button} type="button">Еще</button>
     </Section>
   );
 };

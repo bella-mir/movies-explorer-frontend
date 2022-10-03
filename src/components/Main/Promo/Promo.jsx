@@ -11,7 +11,7 @@ export const Promo = () => {
         Листайте ниже, чтобы узнать больше про этот проект и его создателя
       </p>
       <a href="#about">
-        <button className={styles.promo__button}>Узнайте больше</button>
+        <button type="button" className={styles.promo__button}>Узнайте больше</button>
       </a>
     </div>
   );
