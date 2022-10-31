@@ -20,7 +20,9 @@ export const HeaderContent = () => {
             Сохраненные фильмы
           </Link>
           <Link className={styles.header__menuLink} to="/profile">
-            <button type="button" className={styles.header__button_biege}>Аккаунт</button>
+            <button type="button" className={styles.header__button_biege}>
+              Аккаунт
+            </button>
           </Link>
         </div>
       )}

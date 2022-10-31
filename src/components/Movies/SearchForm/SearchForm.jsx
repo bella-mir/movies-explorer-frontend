@@ -28,7 +28,6 @@ export const SearchForm = ({
           className={styles.search__input}
           onChange={controlInput.handleChange}
           value={controlInput.values ? controlInput.values.movie : ""}
-          required
         />
         <button className={styles.search__button} type="submit"></button>
       </form>

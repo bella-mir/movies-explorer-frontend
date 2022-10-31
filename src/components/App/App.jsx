@@ -9,8 +9,9 @@ import { Profile } from "../Profile";
 import { Login } from "../Auth/Login/Login";
 import { Register } from "../Auth/Register/Register";
 import { NotFound } from "../NotFound";
+import { mainApi } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
-import { register, authorize, checkToken } from "../../utils/Auth";
+import { register, authorize, checkToken, getUserInfo } from "../../utils/Auth";
 import styles from "./app.module.scss";
 
 export const App = () => {
@@ -18,11 +19,24 @@ export const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState({});
   const [includeShort, setIncludeShort] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
     tokenCheck();
     handleGetMovies();
+    handleGetSavedMovies();
   }, []);
+
+  useEffect(() => {
+    getUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.error(`Can't get user's data ${err}`);
+      });
+  }, [isLoggedIn]);
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
@@ -30,8 +44,7 @@ export const App = () => {
       checkToken(jwt)
         .then((data) => {
           if (data) {
-            // setEmail(data.data.email);
-            // setIsLoggedIn(true);
+            setIsLoggedIn(true);
             console.log(data);
           }
         })
@@ -47,8 +60,7 @@ export const App = () => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
         }
-        // setEmail(email);
-        // setIsLoggedIn(true);
+        setIsLoggedIn(true);
         navigate("/movies");
       })
       .catch((err) => {
@@ -58,33 +70,46 @@ export const App = () => {
 
   const handleRegister = (name, email, password) => {
     register(name, email, password)
-      .then((data) => {
-        // setRegisterInfo(true);
-        navigate("/sign-in");
+      .then(() => {
+        navigate("/signin");
       })
       .catch((err) => {
-        // setRegisterInfo(false);
         console.error(err);
       })
-      .finally(() => {
-        // openRegisterInfo(true);
-      });
+      .finally(() => {});
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    navigate("/");
   };
 
   const handleGetMovies = () => {
     moviesApi
       .getAllMovies()
       .then((result) => {
-        console.log(result);
         setAllMovies(result);
       })
       .catch(console.error);
   };
 
+  const handleGetSavedMovies = () => {
+    mainApi
+      .getSavedMovies()
+      .then((result) => {
+        setSavedMovies(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className={styles.page}>
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <Header isLoggedIn={isLoggedIn} />
         <main>
           <Routes>
             <Route path="/" element={<Main />} />
@@ -92,6 +117,8 @@ export const App = () => {
               path="/movies"
               element={
                 <Movies
+                  savedMovies={savedMovies}
+                  setSavedMovies={setSavedMovies}
                   allMovies={allMovies}
                   includeShort={includeShort}
                   setIncludeShort={setIncludeShort}
@@ -102,6 +129,8 @@ export const App = () => {
               path="/saved-movies"
               element={
                 <Movies
+                  savedMovies={savedMovies}
+                  setSavedMovies={setSavedMovies}
                   allMovies={allMovies}
                   includeShort={includeShort}
                   setIncludeShort={setIncludeShort}
@@ -109,7 +138,10 @@ export const App = () => {
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={<Profile handleLogout={handleLogout} />}
+            />
             <Route
               path="/signin"
               element={<Login handleLogin={handleLogin} />}

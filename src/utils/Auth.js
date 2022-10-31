@@ -34,6 +34,7 @@ export const updateUserInfo = (name, email) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
@@ -47,6 +48,7 @@ export const updateUserInfo = (name, email) => {
 export const getUserInfo = () => {
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
@@ -57,6 +59,7 @@ export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },

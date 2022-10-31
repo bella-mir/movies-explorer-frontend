@@ -17,40 +17,6 @@ export const MoviesCard = (movie) => {
     setIsSaved(false);
   };
 
-  // const [savedMovies, setSavedMovies] = useState({});
-
-  // const isSaved = savedMovies?.some((m) => m.movieId === movie.id) || null;
-
-  // const handleSaveMovie = (m) => {
-  //   mainApi
-  //     .addMovie(m)
-  //     .then((data) => {
-  //       setSavedMovies({ data, ...savedMovies });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const handleDeleteMovie = (m) => {
-
-  //   // const savedMovie = savedMovies.find((item) => item.movieId === m.movieId);
-
-  //   mainApi
-  //     .deleteMovie(m._id)
-  //     .then(() => {
-
-  //       const newMoviesList = savedMovies?.filter(
-  //         (item) => item._id !== m._id
-  //       );
-
-  //       setSavedMovies(newMoviesList);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   return (
     <div className={styles.card}>
       <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
