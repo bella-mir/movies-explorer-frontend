@@ -67,10 +67,23 @@
   opacity: 0.7;
 }
 
+.profile__info {
+  background: none;
+  border: none;
+  text-align: right;
+  font-style: italic;
+}
+
+.profile__info:disabled {
+  font-style: normal;
+}
+
+.profile__info:focus {
+  outline: none;
+}
 
 @media (max-width: 550px) {
-  .profile__data{
+  .profile__data {
     width: 260px;
   }
-
 }

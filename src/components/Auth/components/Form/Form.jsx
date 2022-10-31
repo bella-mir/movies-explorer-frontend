@@ -11,7 +11,7 @@ export const Form = (props) => {
           <div className={styles.form__logo}></div>
         </Link>
         <h2 className={styles.form__greeting}>{props.greeting}</h2>
-        <form className={styles.form__form}>
+        <form className={styles.form__form} onSubmit={props.onSubmit} >
           {props.children}
           <button type="submit" className={styles.form__submit}>{props.submit}</button>
         </form>

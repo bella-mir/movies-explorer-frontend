@@ -5,7 +5,7 @@ export const Input = (props) => {
   return (
     <label className={styles.input__label}>
       {props.label}
-      <input className={styles.input__input} required={props.required}></input>
+      <input className={styles.input__input} required={props.required} onChange={props.onChange} type={props.type} id={props.id} name={props.name} value={props.value}></input>
       <span className={styles.input__error}>{props.error}</span>
     </label>
   );

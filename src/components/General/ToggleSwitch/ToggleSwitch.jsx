@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./toggle-switch.module.scss";
 
-export const ToggleSwitch = () => {
-  const [isToggled, setIsToggled] = useState(true);
-  const onToggle = () => setIsToggled(!isToggled);
+export const ToggleSwitch = ({ includeShort, setIncludeShort }) => {
   return (
     <label className={styles.toggleSwitch}>
       <input
         className={styles.toggleSwitch__input}
         type="checkbox"
-        checked={isToggled}
-        onChange={onToggle}
+        checked={includeShort}
+        onChange={() => setIncludeShort(!includeShort)}
       />
       <span className={styles.toggleSwitch__switch} />
     </label>
