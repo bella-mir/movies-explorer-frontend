@@ -12,7 +12,7 @@ export const AboutMe = () => {
           <div className={styles.about__text}>
             <h3 className={styles.about__name}>Белла</h3>
             <p className={styles.about__occupation}>
-              Фронтенд-разработчик, 25 леты
+              Фронтенд-разработчик, 25 лет
             </p>
             <p className={styles.about__description}>
               Я занимаюсь городскими исследованиями, аналитикой городских
