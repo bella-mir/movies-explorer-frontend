@@ -75,8 +75,10 @@ export const App = () => {
 
   const handleRegister = (name, email, password) => {
     register(name, email, password)
-      .then(() => {
-        navigate("/signin");
+      .then((data) => {
+        if (data) {
+          handleLogin(email, password);
+        }
       })
       .catch((err) => {
         console.error(err);

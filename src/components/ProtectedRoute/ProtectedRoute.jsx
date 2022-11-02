@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   if (jwt) {
     return children;
   } else {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/" />;
   }
 };
 

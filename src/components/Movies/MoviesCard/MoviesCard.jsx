@@ -5,7 +5,6 @@ import classnames from "classnames";
 
 export const MoviesCard = ({
   movie,
-  key,
   savedMode,
   setSavedMovies,
   savedMovies,
@@ -48,7 +47,7 @@ export const MoviesCard = ({
   };
 
   return (
-    <div className={styles.card} key={key}>
+    <div className={styles.card}>
       <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
         <img
           className={styles.card__picture}

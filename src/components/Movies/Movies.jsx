@@ -18,8 +18,9 @@ export const Movies = ({
   const addCards = size.width > 820 ? 3 : 2;
   const [cardsToDisplay, setCardsToDisplay] = useState(maxCards);
   const [serachName, setSearchName] = useState();
-
   const [isLoading, setIsLoading] = useState(true);
+  const [showEmptyAll, setShowEmptyAll] = useState(false);
+  const [showEmptySaved, setShowEmptySaved] = useState(false);
 
   useEffect(() => {
     if (allMovies) {
@@ -54,7 +55,7 @@ export const Movies = ({
   const searchSavedhMovies = (movies, name) => {
     if (!name) {
       return movies;
-    } else if (movies.length < 3) {
+    } else if (movies || movies.length < 3) {
       return {};
     } else {
       return movies.filter((movie) =>
@@ -65,7 +66,20 @@ export const Movies = ({
 
   const selectedAllMovies = searchMovies(renderAllMovies, serachName);
   const selectedSavedMovies = searchSavedhMovies(renderSavedMovies, serachName);
-  // const selectedSavedMovies = renderSavedMovies;
+
+  useEffect(() => {
+    if (selectedAllMovies.length > 0) {
+      setShowEmptyAll(false);
+    } else {
+      setShowEmptyAll(true);
+    }
+
+    if (selectedSavedMovies.length > 0) {
+      setShowEmptySaved(false);
+    } else {
+      setShowEmptySaved(true);
+    }
+  }, [selectedAllMovies, selectedSavedMovies]);
 
   return (
     <>
@@ -74,6 +88,7 @@ export const Movies = ({
         includeShort={includeShort}
         setSearchName={setSearchName}
         serachName={serachName}
+        savedMode={savedMode}
       />
       {isLoading ? (
         <Preloader />
@@ -82,16 +97,19 @@ export const Movies = ({
           setCardsToDisplay={setCardsToDisplay}
           cardsToDisplay={cardsToDisplay}
           addCards={addCards}
+          showEmptyAll={showEmptyAll}
+          showEmptySaved={showEmptySaved}
+          savedMode={savedMode}
         >
           {!savedMode ? (
             <>
-              {selectedAllMovies.length>0
+              {selectedAllMovies.length > 0
                 ? selectedAllMovies
                     .slice(0, cardsToDisplay)
                     .map((movie) => (
                       <MoviesCard
                         movie={movie}
-                        key={movie.id}
+                        key={movie.nameRU}
                         savedMode={savedMode}
                         setSavedMovies={setSavedMovies}
                         savedMovies={savedMovies}
@@ -101,13 +119,13 @@ export const Movies = ({
             </>
           ) : (
             <>
-              {selectedSavedMovies
+              {selectedSavedMovies.length > 0
                 ? selectedSavedMovies
                     .slice(0, cardsToDisplay)
                     .map((movie) => (
                       <MoviesCard
                         movie={movie}
-                        key={movie.id}
+                        key={movie.nameRU}
                         savedMode={savedMode}
                         setSavedMovies={setSavedMovies}
                         savedMovies={savedMovies}

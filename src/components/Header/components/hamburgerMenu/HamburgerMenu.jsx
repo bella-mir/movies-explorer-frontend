@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./hamburger-menu.module.scss";
 
 export const HamburgerMenu = () => {
   const [isOpened, setIsOpened] = useState(true);
   const [buttonPosition, setButtonPosition] = useState("absolute");
-
-  useEffect(() => {}, [buttonPosition]);
 
   const handleChange = (event) => {
     if (event.target.checked) {

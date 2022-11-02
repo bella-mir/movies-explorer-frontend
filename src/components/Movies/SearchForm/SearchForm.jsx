@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Section } from "../../General";
 import { ToggleSwitch } from "../../General/ToggleSwitch/ToggleSwitch";
 import { useForm } from "../../../hooks/useForm";
@@ -8,13 +8,23 @@ export const SearchForm = ({
   includeShort,
   setIncludeShort,
   setSearchName,
+  savedMode,
 }) => {
   const controlInput = useForm();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setErrorMessage("");
+  }, [savedMode, controlInput.values]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { movie } = controlInput.values;
-    setSearchName(movie);
+
+    if (controlInput.values && controlInput.values.movie) {
+      setSearchName(controlInput.values.movie);
+    } else {
+      setErrorMessage("Необходимо ввести слово для поиска");
+    }
   };
 
   return (
@@ -31,6 +41,7 @@ export const SearchForm = ({
         />
         <button className={styles.search__button} type="submit"></button>
       </form>
+      <span className={styles.search__error}> {errorMessage}</span>
 
       <div className={styles.search__filter}>
         <ToggleSwitch

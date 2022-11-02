@@ -29,6 +29,15 @@
   cursor: pointer;
 }
 
+.cardList__notfound {
+  display: flex;
+  justify-content: center;
+  color: #3456f3;
+  font-weight: 600;
+  margin: auto;
+  text-align: center;
+}
+
 @media (max-width: 550px) {
   .cards {
     padding-top: 40px;

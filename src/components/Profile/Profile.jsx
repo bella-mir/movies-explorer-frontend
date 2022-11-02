@@ -11,9 +11,7 @@ export const Profile = ({ handleLogout }) => {
 
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  useEffect(() => {}, [currentUser]);
 
   const onUpdateUser = (name, email) => {
     updateUserInfo(name, email)
