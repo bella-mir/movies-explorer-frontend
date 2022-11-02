@@ -1,34 +1,68 @@
-import React, { useState } from "react";
-// import { mainApi } from "../../../utils/MainApi";
+import React, { useState, useEffect } from "react";
+import { mainApi } from "../../../utils/MainApi";
 import styles from "./moviesCard.module.scss";
 import classnames from "classnames";
 
-export const MoviesCard = (movie) => {
+export const MoviesCard = ({
+  movie,
+  key,
+  savedMode,
+  setSavedMovies,
+  savedMovies,
+}) => {
   const hours = parseInt(movie.duration / 60);
   const minutes = movie.duration % 60;
-
   const [isSaved, setIsSaved] = useState(false);
 
-  const handleSaveMovie = () => {
-    setIsSaved(true);
+  useEffect(() => {
+    setIsSaved(() => savedMovies.some((m) => m.movieId === movie.id));
+  }, [savedMovies]);
+
+  const handleSaveMovie = (movie) => {
+    mainApi
+      .addMovie(movie)
+      .then((data) => {
+        setSavedMovies([data.data, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  const handleDeleteMovie = () => {
-    setIsSaved(false);
+  const handleDeleteMovie = (movie) => {
+    const savedMovie = savedMode
+      ? savedMovies.find((m) => m.movieId === movie.movieId)
+      : savedMovies.find((m) => m.movieId === movie.id);
+
+    mainApi
+      .deleteMovie(savedMovie._id)
+      .then(() => {
+        const newSavedMovies = savedMovies.filter(
+          (movie) => movie._id !== savedMovie._id
+        );
+        setSavedMovies(newSavedMovies);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} key={key}>
       <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
         <img
           className={styles.card__picture}
           alt={movie.nameRU}
-          src={`https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`}
+          src={
+            !savedMode
+              ? `https://api.nomoreparties.co/${movie.image.url}`
+              : movie.image
+          }
         />
       </a>
       <div className={styles.card__header}>
         <h3 className={styles.card__title}>{movie.nameRU}</h3>
-        {!movie.savedMode ? (
+        {!savedMode ? (
           <button
             type="button"
             className={classnames(
@@ -44,7 +78,7 @@ export const MoviesCard = (movie) => {
           <button
             type="button"
             className={classnames(styles.card__button, styles.card__delete)}
-            // onClick={() => handleDeleteMovie(movie)}
+            onClick={() => handleDeleteMovie(movie)}
           ></button>
         )}
       </div>

@@ -4,6 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { updateUserInfo } from "../../utils/Auth";
 import { CurrentUserContext } from "../../contexts/userContext";
 import styles from "./profile.module.scss";
+import { Preloader } from "../General/Preloader/Preloader";
 
 export const Profile = ({ handleLogout }) => {
   const controlInput = useForm();
@@ -44,56 +45,62 @@ export const Profile = ({ handleLogout }) => {
 
   return (
     <Section className={styles.profile}>
-      <h2 className={styles.profile__greeting}>
-        Привет, {currentUser ? currentUser.data.name : ""}!
-      </h2>
-      <div className={styles.profile__data}>
-        <p className={styles.profile__info}>Имя</p>
-        <input
-          id="name"
-          name="name"
-          className={styles.profile__info}
-          value={
-            controlInput.values
-              ? controlInput.values.name
-              : currentUser.data.name
-          }
-          disabled={!editingMode}
-          onChange={controlInput.handleChange}
-        />
-      </div>
-      <div className={styles.profile__data}>
-        <p className={styles.profile__info}>Почта</p>
-        <input
-          id="mail"
-          name="mail"
-          className={styles.profile__info}
-          value={
-            controlInput.values
-              ? controlInput.values.mail
-              : currentUser.data.email
-          }
-          disabled={!editingMode}
-          onChange={controlInput.handleChange}
-        />
-      </div>
+      {currentUser ? (
+        <>
+          <h2 className={styles.profile__greeting}>
+            Привет, {currentUser ? currentUser.data.name : ""}!
+          </h2>
+          <div className={styles.profile__data}>
+            <p className={styles.profile__info}>Имя</p>
+            <input
+              id="name"
+              name="name"
+              className={styles.profile__info}
+              value={
+                controlInput.values
+                  ? controlInput.values.name
+                  : currentUser.data.name
+              }
+              disabled={!editingMode}
+              onChange={controlInput.handleChange}
+            />
+          </div>
+          <div className={styles.profile__data}>
+            <p className={styles.profile__info}>Почта</p>
+            <input
+              id="mail"
+              name="mail"
+              className={styles.profile__info}
+              value={
+                controlInput.values
+                  ? controlInput.values.mail
+                  : currentUser.data.email
+              }
+              disabled={!editingMode}
+              onChange={controlInput.handleChange}
+            />
+          </div>
 
-      <div className={styles.profile__bottom}>
-        <button
-          className={styles.profile__editing}
-          type="button"
-          onClick={() => {
-            editingMode && handleSave();
-            setEditingMode(!editingMode);
-          }}
-        >
-          {editingMode ? "Сохранить" : "Редактировать"}
-        </button>
+          <div className={styles.profile__bottom}>
+            <button
+              className={styles.profile__editing}
+              type="button"
+              onClick={() => {
+                editingMode && handleSave();
+                setEditingMode(!editingMode);
+              }}
+            >
+              {editingMode ? "Сохранить" : "Редактировать"}
+            </button>
 
-        <button onClick={handleLogout} className={styles.profile__logout}>
-          Выйти из аккаунта
-        </button>
-      </div>
+            <button onClick={handleLogout} className={styles.profile__logout}>
+              Выйти из аккаунта
+            </button>
+          </div>
+        </>
+      ) : (
+        <Preloader />
+      )}
     </Section>
   );
 };

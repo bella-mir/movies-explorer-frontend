@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/userContext";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
@@ -9,6 +9,7 @@ import { Profile } from "../Profile";
 import { Login } from "../Auth/Login/Login";
 import { Register } from "../Auth/Register/Register";
 import { NotFound } from "../NotFound";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { mainApi } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 import { register, authorize, checkToken, getUserInfo } from "../../utils/Auth";
@@ -26,7 +27,7 @@ export const App = () => {
     tokenCheck();
     handleGetMovies();
     handleGetSavedMovies();
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     getUserInfo()
@@ -45,7 +46,6 @@ export const App = () => {
         .then((data) => {
           if (data) {
             setIsLoggedIn(true);
-            console.log(data);
           }
         })
         .catch((err) => {
@@ -99,10 +99,10 @@ export const App = () => {
     mainApi
       .getSavedMovies()
       .then((result) => {
-        setSavedMovies(result);
+        setSavedMovies(result.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -116,39 +116,59 @@ export const App = () => {
             <Route
               path="/movies"
               element={
-                <Movies
-                  savedMovies={savedMovies}
-                  setSavedMovies={setSavedMovies}
-                  allMovies={allMovies}
-                  includeShort={includeShort}
-                  setIncludeShort={setIncludeShort}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Movies
+                    savedMovies={savedMovies}
+                    setSavedMovies={setSavedMovies}
+                    allMovies={allMovies}
+                    includeShort={includeShort}
+                    setIncludeShort={setIncludeShort}
+                  />
+                </ProtectedRoute>
               }
             />
             <Route
               path="/saved-movies"
               element={
-                <Movies
-                  savedMovies={savedMovies}
-                  setSavedMovies={setSavedMovies}
-                  allMovies={allMovies}
-                  includeShort={includeShort}
-                  setIncludeShort={setIncludeShort}
-                  savedMode={true}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Movies
+                    savedMovies={savedMovies}
+                    setSavedMovies={setSavedMovies}
+                    allMovies={allMovies}
+                    includeShort={includeShort}
+                    setIncludeShort={setIncludeShort}
+                    savedMode={true}
+                  />
+                </ProtectedRoute>
               }
             />
             <Route
               path="/profile"
-              element={<Profile handleLogout={handleLogout} />}
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile handleLogout={handleLogout} />
+                </ProtectedRoute>
+              }
             />
             <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} />}
+              element={
+                isLoggedIn ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Login handleLogin={handleLogin} />
+                )
+              }
             />
             <Route
               path="/signup"
-              element={<Register handleRegister={handleRegister} />}
+              element={
+                isLoggedIn ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Register handleRegister={handleRegister} />
+                )
+              }
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

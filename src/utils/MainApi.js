@@ -9,23 +9,40 @@ class MainApi {
   };
 
   getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`, { method: "GET" }).then((res) => {
+    return fetch(`${this._baseUrl}movies`, {
+      method: "GET",
+      headers: { ...this._headers },
+    }).then((res) => {
       return this.checkResponse(res);
     });
   }
 
   addMovie(movie) {
-    return fetch(`${this._baseUrl}/movies`, {
+    return fetch(`${this._baseUrl}movies`, {
       method: "POST",
-      body: JSON.stringify({ ...movie }),
+      headers: { ...this._headers },
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id.toString(),
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
     }).then((res) => {
       return this.checkResponse(res);
     });
   }
 
   deleteMovie(id) {
-    return fetch(`${this._baseUrl}/movies/${id}`, {
+    return fetch(`${this._baseUrl}movies/${id}`, {
       method: "DELETE",
+      headers: { ...this._headers },
     }).then((res) => {
       return this.checkResponse(res);
     });

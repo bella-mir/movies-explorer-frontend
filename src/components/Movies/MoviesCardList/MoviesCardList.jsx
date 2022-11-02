@@ -3,7 +3,9 @@ import { Section } from "../../General";
 import styles from "./moviesCardList.module.scss";
 
 export const MoviesCardList = (props) => {
-  const handleShowMoreMovies = () => {};
+  const handleShowMoreMovies = () => {
+    props.setCardsToDisplay(props.cardsToDisplay + props.addCards);
+  };
 
   return (
     <Section className={styles.cards}>

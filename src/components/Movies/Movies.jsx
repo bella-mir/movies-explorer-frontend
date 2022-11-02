@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MoviesCardList } from "./MoviesCardList/MoviesCardList";
 import { SearchForm } from "./SearchForm/SearchForm";
 import { MoviesCard } from "./MoviesCard/MoviesCard";
+import { Preloader } from "../General/Preloader/Preloader";
 import useWindowSize from "../../hooks/useWindowSize";
-// import { data } from "./MoviesCard/movies-mock-data";
 
 export const Movies = ({
   allMovies,
@@ -15,9 +15,32 @@ export const Movies = ({
 }) => {
   const size = useWindowSize();
   const maxCards = size.width > 820 ? 12 : size.width > 480 ? 8 : 5;
+  const addCards = size.width > 820 ? 3 : 2;
+  const [cardsToDisplay, setCardsToDisplay] = useState(maxCards);
   const [serachName, setSearchName] = useState();
-  const shortMovies = allMovies.filter((movie) => movie.duration <= 40);
-  const renderMovies = !includeShort ? allMovies : shortMovies;
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (allMovies) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [allMovies]);
+
+  const shortAllMovies =
+    allMovies.length > 0
+      ? allMovies.filter((movie) => movie.duration <= 40)
+      : null;
+
+  const shortSavedMovies =
+    savedMovies.length > 0
+      ? savedMovies.filter((movie) => movie.duration <= 40)
+      : null;
+
+  const renderAllMovies = !includeShort ? allMovies : shortAllMovies;
+  const renderSavedMovies = !includeShort ? savedMovies : shortSavedMovies;
 
   const searchMovies = (movies, name) => {
     if (!movies || !name) {
@@ -27,7 +50,22 @@ export const Movies = ({
       movie.nameRU.toLowerCase().includes(name.toLowerCase())
     );
   };
-  const selectedMovies = searchMovies(renderMovies, serachName);
+
+  const searchSavedhMovies = (movies, name) => {
+    if (!name) {
+      return movies;
+    } else if (movies.length < 3) {
+      return {};
+    } else {
+      return movies.filter((movie) =>
+        movie.nameRU.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+  };
+
+  const selectedAllMovies = searchMovies(renderAllMovies, serachName);
+  const selectedSavedMovies = searchSavedhMovies(renderSavedMovies, serachName);
+  // const selectedSavedMovies = renderSavedMovies;
 
   return (
     <>
@@ -37,37 +75,49 @@ export const Movies = ({
         setSearchName={setSearchName}
         serachName={serachName}
       />
-      <MoviesCardList>
-        {!savedMode ? (
-          <>
-            {selectedMovies
-              ? selectedMovies
-                  .slice(0, maxCards)
-                  .map((movie) => (
-                    <MoviesCard
-                      {...movie}
-                      key={movie.id}
-                      savedMode={savedMode}
-                    />
-                  ))
-              : null}
-          </>
-        ) : (
-          <>
-            {savedMovies
-              ? savedMovies
-                  .slice(0, maxCards)
-                  .map((movie) => (
-                    <MoviesCard
-                      {...movie}
-                      key={movie.id}
-                      savedMode={savedMode}
-                    />
-                  ))
-              : null}
-          </>
-        )}
-      </MoviesCardList>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          setCardsToDisplay={setCardsToDisplay}
+          cardsToDisplay={cardsToDisplay}
+          addCards={addCards}
+        >
+          {!savedMode ? (
+            <>
+              {selectedAllMovies.length>0
+                ? selectedAllMovies
+                    .slice(0, cardsToDisplay)
+                    .map((movie) => (
+                      <MoviesCard
+                        movie={movie}
+                        key={movie.id}
+                        savedMode={savedMode}
+                        setSavedMovies={setSavedMovies}
+                        savedMovies={savedMovies}
+                      />
+                    ))
+                : null}
+            </>
+          ) : (
+            <>
+              {selectedSavedMovies
+                ? selectedSavedMovies
+                    .slice(0, cardsToDisplay)
+                    .map((movie) => (
+                      <MoviesCard
+                        movie={movie}
+                        key={movie.id}
+                        savedMode={savedMode}
+                        setSavedMovies={setSavedMovies}
+                        savedMovies={savedMovies}
+                      />
+                    ))
+                : null}
+            </>
+          )}
+        </MoviesCardList>
+      )}
     </>
   );
 };
