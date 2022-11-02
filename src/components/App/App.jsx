@@ -22,21 +22,25 @@ export const App = () => {
   const [includeShort, setIncludeShort] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isRegisterError, setRegisterError] = useState(false);
+  const [isLoginError, setLoginError] = useState(false);
 
   useEffect(() => {
     tokenCheck();
-    handleGetMovies();
-    handleGetSavedMovies();
-  }, [isLoggedIn]);
+  }, []);
 
   useEffect(() => {
-    getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.error(`Can't get user's data ${err}`);
-      });
+    if (isLoggedIn) {
+      getUserInfo()
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .catch((err) => {
+          console.error(`Can't get user's data ${err}`);
+        });
+      handleGetMovies();
+      handleGetSavedMovies();
+    }
   }, [isLoggedIn]);
 
   const tokenCheck = () => {
@@ -65,6 +69,7 @@ export const App = () => {
       })
       .catch((err) => {
         console.error(err);
+        setLoginError(true);
       });
   };
 
@@ -75,6 +80,7 @@ export const App = () => {
       })
       .catch((err) => {
         console.error(err);
+        setRegisterError(true);
       })
       .finally(() => {});
   };
@@ -116,7 +122,7 @@ export const App = () => {
             <Route
               path="/movies"
               element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProtectedRoute>
                   <Movies
                     savedMovies={savedMovies}
                     setSavedMovies={setSavedMovies}
@@ -130,7 +136,7 @@ export const App = () => {
             <Route
               path="/saved-movies"
               element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProtectedRoute>
                   <Movies
                     savedMovies={savedMovies}
                     setSavedMovies={setSavedMovies}
@@ -145,7 +151,7 @@ export const App = () => {
             <Route
               path="/profile"
               element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProtectedRoute>
                   <Profile handleLogout={handleLogout} />
                 </ProtectedRoute>
               }
@@ -156,7 +162,7 @@ export const App = () => {
                 isLoggedIn ? (
                   <Navigate to="/" />
                 ) : (
-                  <Login handleLogin={handleLogin} />
+                  <Login handleLogin={handleLogin} isError={isLoginError} />
                 )
               }
             />
@@ -166,7 +172,10 @@ export const App = () => {
                 isLoggedIn ? (
                   <Navigate to="/" />
                 ) : (
-                  <Register handleRegister={handleRegister} />
+                  <Register
+                    handleRegister={handleRegister}
+                    isError={isRegisterError}
+                  />
                 )
               }
             />

@@ -12,7 +12,7 @@ export const AboutMe = () => {
           <div className={styles.about__text}>
             <h3 className={styles.about__name}>Белла</h3>
             <p className={styles.about__occupation}>
-              Фронтенд-разработчик, 24 года
+              Фронтенд-разработчик, 25 леты
             </p>
             <p className={styles.about__description}>
               Я занимаюсь городскими исследованиями, аналитикой городских
@@ -26,11 +26,7 @@ export const AboutMe = () => {
             Github
           </a>
         </div>
-        <img
-          src={photo}
-          className={styles.about__photo}
-          alt="BellaS face"
-        />
+        <img src={photo} className={styles.about__photo} alt="BellaS face" />
       </div>
     </Section>
   );

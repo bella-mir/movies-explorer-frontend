@@ -1,8 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ isLoggedIn, children }) => {
-  return isLoggedIn ? children : <Navigate to="/signin" />;
+const ProtectedRoute = ({ children }) => {
+  const jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    return children;
+  } else {
+    return <Navigate to="/signin" />;
+  }
 };
 
 export default ProtectedRoute;

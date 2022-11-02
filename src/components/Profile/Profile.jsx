@@ -45,7 +45,7 @@ export const Profile = ({ handleLogout }) => {
 
   return (
     <Section className={styles.profile}>
-      {currentUser ? (
+      {currentUser.data ? (
         <>
           <h2 className={styles.profile__greeting}>
             Привет, {currentUser ? currentUser.data.name : ""}!

@@ -3,7 +3,7 @@ import { Form } from "../components/Form";
 import { Input } from "../components/Input";
 import { useForm } from "../../../hooks/useForm";
 
-export const Register = ({ handleRegister }) => {
+export const Register = ({ handleRegister, isError }) => {
   const controlInput = useForm();
 
   const handleSubmit = (e) => {
@@ -47,6 +47,7 @@ export const Register = ({ handleRegister }) => {
         type="password"
         value={controlInput.values ? controlInput.values.password : ""}
         key={3}
+        error={isError? 'Что-то пошло не так ...' : ''}
       />
     </Form>
   );

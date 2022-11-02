@@ -8,6 +8,7 @@ export const Header = (props) => {
     <Routes>
       {["movies", "/saved-movies", "/profile"].map((path) => (
         <Route
+          key={path}
           path={path}
           element={
             <header className={styles.header}>
