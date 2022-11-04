@@ -103,7 +103,7 @@ export const Movies = ({
         >
           {!savedMode ? (
             <>
-              {selectedAllMovies.length > 0
+              {selectedAllMovies.length > 1
                 ? selectedAllMovies
                     .slice(0, cardsToDisplay)
                     .map((movie) => (
@@ -119,7 +119,7 @@ export const Movies = ({
             </>
           ) : (
             <>
-              {selectedSavedMovies.length > 0
+              {selectedSavedMovies.length > 1
                 ? selectedSavedMovies
                     .slice(0, cardsToDisplay)
                     .map((movie) => (

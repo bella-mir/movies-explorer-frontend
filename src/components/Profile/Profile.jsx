@@ -8,18 +8,39 @@ import { Preloader } from "../General/Preloader/Preloader";
 
 export const Profile = ({ handleLogout }) => {
   const controlInput = useForm();
+  const [saveDisabled, setSaveDisabled] = useState(false);
+  const [editingMode, setEditingMode] = useState(false);
+  const [isEditSuccess, setIsEditSuccess] = useState("");
 
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   useEffect(() => {}, [currentUser]);
 
+  useEffect(() => {
+    if (editingMode) {
+      !controlInput.values ? setSaveDisabled(true) : setSaveDisabled(false);
+    } else {
+      setSaveDisabled(false);
+    }
+  }, [controlInput.values, editingMode]);
+
   const onUpdateUser = (name, email) => {
+    if ((name === currentUser.data.name) & (email === currentUser.data.email)) {
+      return;
+    }
+
     updateUserInfo(name, email)
       .then((data) => {
         setCurrentUser(data);
+        setIsEditSuccess("Данные успешно обновлены");
       })
       .catch((err) => {
+        controlInput.setValues({
+          name: currentUser.data.name,
+          mail: currentUser.data.email,
+        });
         setCurrentUser(currentUser);
+        setIsEditSuccess("Ошибка обновления данных, попробуте еще раз");
         console.error(err);
       });
   };
@@ -38,8 +59,6 @@ export const Profile = ({ handleLogout }) => {
       onUpdateUser(name, mail);
     }
   };
-
-  const [editingMode, setEditingMode] = useState(false);
 
   return (
     <Section className={styles.profile}>
@@ -78,6 +97,7 @@ export const Profile = ({ handleLogout }) => {
               onChange={controlInput.handleChange}
             />
           </div>
+          <span className={styles.profile__infoMessage}>{isEditSuccess}</span>
 
           <div className={styles.profile__bottom}>
             <button
@@ -85,8 +105,10 @@ export const Profile = ({ handleLogout }) => {
               type="button"
               onClick={() => {
                 editingMode && handleSave();
-                setEditingMode(!editingMode);
+                !editingMode && setIsEditSuccess("");
+                setEditingMode(() => !editingMode);
               }}
+              disabled={saveDisabled}
             >
               {editingMode ? "Сохранить" : "Редактировать"}
             </button>

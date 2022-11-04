@@ -164,7 +164,11 @@ export const App = () => {
                 isLoggedIn ? (
                   <Navigate to="/" />
                 ) : (
-                  <Login handleLogin={handleLogin} isError={isLoginError} />
+                  <Login
+                    handleLogin={handleLogin}
+                    isError={isLoginError}
+                    setError={setLoginError}
+                  />
                 )
               }
             />
@@ -177,6 +181,7 @@ export const App = () => {
                   <Register
                     handleRegister={handleRegister}
                     isError={isRegisterError}
+                    setError={setRegisterError}
                   />
                 )
               }

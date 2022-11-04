@@ -23,7 +23,7 @@ export const SearchForm = ({
     if (controlInput.values && controlInput.values.movie) {
       setSearchName(controlInput.values.movie);
     } else {
-      setErrorMessage("Необходимо ввести слово для поиска");
+      setErrorMessage("Необходимо ввести ключевое слово для поиска");
     }
   };
 
