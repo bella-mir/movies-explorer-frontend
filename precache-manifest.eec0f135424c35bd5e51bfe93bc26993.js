@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "110efdb3be4ee6e23e90",
-    "url": "/movies-explorer-frontend/static/css/main.65077fa3.chunk.css"
+    "revision": "a1112424625e9b7fca61",
+    "url": "/movies-explorer-frontend/static/css/main.7735928c.chunk.css"
   },
   {
-    "revision": "110efdb3be4ee6e23e90",
-    "url": "/movies-explorer-frontend/static/js/main.418e3fce.chunk.js"
+    "revision": "a1112424625e9b7fca61",
+    "url": "/movies-explorer-frontend/static/js/main.54d4c338.chunk.js"
   },
   {
     "revision": "6ea5c6d38c4b420023fb",
     "url": "/movies-explorer-frontend/static/js/runtime~main.5d56654f.js"
   },
   {
-    "revision": "9cc08b076e9b43b860ba",
-    "url": "/movies-explorer-frontend/static/js/2.0202b01e.chunk.js"
+    "revision": "9e86fd316a4e40f3340a",
+    "url": "/movies-explorer-frontend/static/js/2.7b42a420.chunk.js"
   },
   {
     "revision": "dfef2813c51b7c1e772e",
@@ -44,31 +44,31 @@ self.__precacheManifest = [
     "url": "/movies-explorer-frontend/static/media/myphoto.b77b90cb.jpeg"
   },
   {
-    "revision": "0dae34d5a70aa5062a7dd26ae030780d",
-    "url": "/movies-explorer-frontend/static/media/Inter-Bold.0dae34d5.woff2"
-  },
-  {
     "revision": "d22a0d6612cceed0724e681a3a1e90da",
     "url": "/movies-explorer-frontend/static/media/Inter-Regular.d22a0d66.woff2"
   },
   {
-    "revision": "30690bb6519a21e77ed29ff123497df3",
-    "url": "/movies-explorer-frontend/static/media/Inter-Bold.30690bb6.woff"
+    "revision": "0dae34d5a70aa5062a7dd26ae030780d",
+    "url": "/movies-explorer-frontend/static/media/Inter-Bold.0dae34d5.woff2"
   },
   {
     "revision": "4d127124f941ebf54a749cf9ab10e545",
     "url": "/movies-explorer-frontend/static/media/Inter-Regular.4d127124.woff"
   },
   {
-    "revision": "49c59986c2a8f1a08a4002b17e2dc62d",
-    "url": "/movies-explorer-frontend/static/media/Inter-Black.49c59986.woff2"
-  },
-  {
     "revision": "af718f919aafb2f3178ac634c7f37082",
     "url": "/movies-explorer-frontend/static/media/Inter-Black.af718f91.woff"
   },
   {
-    "revision": "78f9b5a1199be6310212f1f03dd0e1e1",
+    "revision": "30690bb6519a21e77ed29ff123497df3",
+    "url": "/movies-explorer-frontend/static/media/Inter-Bold.30690bb6.woff"
+  },
+  {
+    "revision": "49c59986c2a8f1a08a4002b17e2dc62d",
+    "url": "/movies-explorer-frontend/static/media/Inter-Black.49c59986.woff2"
+  },
+  {
+    "revision": "34d877e2e6d46eaf76eaf801aff57c83",
     "url": "/movies-explorer-frontend/index.html"
   }
 ];
