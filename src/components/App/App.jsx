@@ -18,12 +18,18 @@ import styles from "./app.module.scss";
 export const App = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
-  const [allMovies, setAllMovies] = useState({});
   const [includeShort, setIncludeShort] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [savedSearchMovies, setSearchSavedMovies] = useState([]);
   const [isRegisterError, setRegisterError] = useState(false);
   const [isLoginError, setLoginError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [displayMovies, setDisplayMovies] = useState({});
+  const [shortMovies, setShortMovies] = useState({});
+  const [shortSavedMovies, setShortSavedMovies] = useState({});
+  const [nothingFoundAll, setNothingFoundAll] = useState(false);
+  const [nothingFoundSaved, setNothingFoundSaved] = useState(false);
 
   useEffect(() => {
     tokenCheck();
@@ -31,6 +37,16 @@ export const App = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
+      mainApi
+        .getSavedMovies()
+        .then((data) => {
+          setSavedMovies(data.data);
+          setShortSavedMovies(() => findShortMovies(data.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       getUserInfo()
         .then((data) => {
           setCurrentUser(data);
@@ -38,8 +54,10 @@ export const App = () => {
         .catch((err) => {
           console.error(`Can't get user's data ${err}`);
         });
-      handleGetMovies();
-      handleGetSavedMovies();
+      if (JSON.parse(localStorage.getItem("filteredMovies"))) {
+        setDisplayMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+        setIncludeShort(JSON.parse(localStorage.getItem("checkbox")));
+      }
     }
   }, [isLoggedIn]);
 
@@ -88,28 +106,94 @@ export const App = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwt");
+    localStorage.clear();
     setIsLoggedIn(false);
+    setDisplayMovies();
+
     setCurrentUser({});
     navigate("/");
   };
 
-  const handleGetMovies = () => {
-    moviesApi
-      .getAllMovies()
-      .then((result) => {
-        setAllMovies(result);
-      })
-      .catch(console.error);
+  const searchMovies = (movies, name) => {
+    if (!movies || !name) {
+      return "";
+    }
+    return movies.filter((movie) =>
+      movie.nameRU.toLowerCase().includes(name.toLowerCase())
+    );
   };
 
-  const handleGetSavedMovies = () => {
+  const findShortMovies = (movies) => {
+    if (!movies) {
+      return "";
+    }
+    return movies.filter((movie) => movie.duration <= 40);
+  };
+
+  const handleGetMovies = (searchName) => {
+    if (!JSON.parse(localStorage.getItem("allMovies"))) {
+      moviesApi
+        .getAllMovies()
+        .then((result) => {
+          localStorage.setItem("allMovies", JSON.stringify(result));
+        })
+        .then(() => {
+          setIsLoading(true);
+          const searchResult = searchMovies(
+            JSON.parse(localStorage.getItem("allMovies")),
+            searchName
+          );
+          const shortMovies = findShortMovies(searchResult);
+          setShortMovies(shortMovies);
+          setDisplayMovies(() => searchResult);
+          localStorage.setItem("filteredMovies", JSON.stringify(searchResult));
+          localStorage.setItem("searchKeyword", searchName);
+          localStorage.setItem("checkbox", includeShort);
+          setTimeout(() => setIsLoading(false), 1500);
+
+          if (searchResult.length < 1) {
+            setNothingFoundAll(() => true);
+          }
+        })
+        .catch((err) => {
+          setNothingFoundAll(() => true);
+          console.log(err);
+        });
+    } else {
+      setIsLoading(true);
+      const searchResult = searchMovies(
+        JSON.parse(localStorage.getItem("allMovies")),
+        searchName
+      );
+      const shortMovies = findShortMovies(searchResult);
+      setShortMovies(shortMovies);
+      setDisplayMovies(() => searchResult);
+      if (searchResult.length < 1) {
+        setNothingFoundAll(() => true);
+      }
+      localStorage.setItem("filteredMovies", JSON.stringify(searchResult));
+      localStorage.setItem("searchKeyword", searchName);
+      localStorage.setItem("checkbox", includeShort);
+      setTimeout(() => setIsLoading(false), 1500);
+    }
+  };
+
+  const handleGetSavedMovies = (searchName) => {
+    setIsLoading(true);
     mainApi
       .getSavedMovies()
       .then((result) => {
         setSavedMovies(result.data);
+        setShortSavedMovies(() => findShortMovies(result.data));
+        const searchResult = searchMovies(result.data, searchName);
+        setSearchSavedMovies(searchResult);
+        setTimeout(() => setIsLoading(false), 1500);
+        if (searchResult.length < 1) {
+          setNothingFoundSaved(() => true);
+        }
       })
       .catch((err) => {
+        setNothingFoundSaved(() => true);
         console.error(err);
       });
   };
@@ -124,13 +208,21 @@ export const App = () => {
             <Route
               path="/movies"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Movies
+                    onSubmit={handleGetMovies}
                     savedMovies={savedMovies}
                     setSavedMovies={setSavedMovies}
-                    allMovies={allMovies}
+                    displayMovies={displayMovies}
                     includeShort={includeShort}
                     setIncludeShort={setIncludeShort}
+                    isLoading={isLoading}
+                    savedMode={false}
+                    searchName={localStorage.getItem("searchKeyword")}
+                    shortMovies={shortMovies}
+                    shortSavedMovies={shortSavedMovies}
+                    nothingFoundAll={nothingFoundAll}
+                    nothingFoundSaved={nothingFoundSaved}
                   />
                 </ProtectedRoute>
               }
@@ -138,14 +230,21 @@ export const App = () => {
             <Route
               path="/saved-movies"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Movies
+                    onSubmit={handleGetSavedMovies}
                     savedMovies={savedMovies}
                     setSavedMovies={setSavedMovies}
-                    allMovies={allMovies}
+                    savedSearchMovies={savedSearchMovies}
                     includeShort={includeShort}
                     setIncludeShort={setIncludeShort}
                     savedMode={true}
+                    isLoading={isLoading}
+                    displayMovies={displayMovies}
+                    shortMovies={shortMovies}
+                    shortSavedMovies={shortSavedMovies}
+                    nothingFoundAll={nothingFoundAll}
+                    nothingFoundSaved={nothingFoundSaved}
                   />
                 </ProtectedRoute>
               }
@@ -153,7 +252,7 @@ export const App = () => {
             <Route
               path="/profile"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Profile handleLogout={handleLogout} />
                 </ProtectedRoute>
               }
@@ -162,7 +261,7 @@ export const App = () => {
               path="/signin"
               element={
                 isLoggedIn ? (
-                  <Navigate to="/" />
+                  <Navigate to="/movies" />
                 ) : (
                   <Login
                     handleLogin={handleLogin}
@@ -176,7 +275,7 @@ export const App = () => {
               path="/signup"
               element={
                 isLoggedIn ? (
-                  <Navigate to="/" />
+                  <Navigate to="/movies" />
                 ) : (
                   <Register
                     handleRegister={handleRegister}

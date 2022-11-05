@@ -7,21 +7,34 @@ import styles from "./searchForm.module.scss";
 export const SearchForm = ({
   includeShort,
   setIncludeShort,
-  setSearchName,
   savedMode,
+  onSubmit,
 }) => {
   const controlInput = useForm();
   const [errorMessage, setErrorMessage] = useState("");
+  const [alternativeInput, setAlternativeInput] = useState("");
 
   useEffect(() => {
     setErrorMessage("");
   }, [savedMode, controlInput.values]);
 
+  useEffect(() => {
+    if (savedMode) {
+      setAlternativeInput(() => "");
+    } else {
+      const savedSearch = localStorage.getItem("searchKeyword")
+        ? localStorage.getItem("searchKeyword")
+        : "";
+
+      setAlternativeInput(() => savedSearch);
+    }
+  }, [savedMode]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (controlInput.values && controlInput.values.movie) {
-      setSearchName(controlInput.values.movie);
+      onSubmit(controlInput.values.movie);
     } else {
       setErrorMessage("Необходимо ввести ключевое слово для поиска");
     }
@@ -37,7 +50,9 @@ export const SearchForm = ({
           placeholder="Фильм"
           className={styles.search__input}
           onChange={controlInput.handleChange}
-          value={controlInput.values ? controlInput.values.movie : ""}
+          value={
+            controlInput.values ? controlInput.values.movie : alternativeInput
+          }
         />
         <button className={styles.search__button} type="submit"></button>
       </form>
