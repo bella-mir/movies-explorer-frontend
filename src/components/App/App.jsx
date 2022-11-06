@@ -33,10 +33,18 @@ export const App = () => {
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
+      getUserInfo()
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .catch((err) => {
+          console.error(`Can't get user's data ${err}`);
+        });
+
       mainApi
         .getSavedMovies()
         .then((data) => {
@@ -47,13 +55,6 @@ export const App = () => {
           console.log(err);
         });
 
-      getUserInfo()
-        .then((data) => {
-          setCurrentUser(data);
-        })
-        .catch((err) => {
-          console.error(`Can't get user's data ${err}`);
-        });
       if (JSON.parse(localStorage.getItem("filteredMovies"))) {
         setDisplayMovies(JSON.parse(localStorage.getItem("filteredMovies")));
         setIncludeShort(JSON.parse(localStorage.getItem("checkbox")));
