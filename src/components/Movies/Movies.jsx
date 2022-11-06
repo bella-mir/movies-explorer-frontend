@@ -130,7 +130,7 @@ export const Movies = ({
           )}
         </div>
 
-        {(allToDisplay && allToDisplay.length > maxCards) && !savedMode ? (
+        {allToDisplay && allToDisplay.length > 0 && !savedMode ? (
           <button
             className={styles.cardList__button}
             type="button"
