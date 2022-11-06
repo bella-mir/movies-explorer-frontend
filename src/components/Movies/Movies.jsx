@@ -24,21 +24,29 @@ export const Movies = ({
 }) => {
   const size = useWindowSize();
 
-  const [maxCards, setMaxCards] = useState(
-    size.width > 820 ? 12 : size.width > 480 ? 8 : 5
-  );
-  const [addCards, setAddCards] = useState(size.width > 820 ? 3 : 2);
+  const [maxCards, setMaxCards] = useState(12);
+  const [addCards, setAddCards] = useState(4);
   const [cardsToDisplay, setCardsToDisplay] = useState(maxCards);
 
   const [allToDisplay, setAllToDisplay] = useState({ ...displayMovies });
-  const [savedToDisplay, setSavedToDisplay] = useState({ ...savedSearchMovies });
+  const [savedToDisplay, setSavedToDisplay] = useState({
+    ...savedSearchMovies,
+  });
   const [notFoundText, setNotFoundText] = useState("");
 
-  useEffect(() => {}, [savedSearchMovies]);
+  useEffect(() => {}, [size.width, savedSearchMovies]);
 
   useEffect(() => {
-    setMaxCards(size.width > 820 ? 12 : size.width > 480 ? 8 : 5);
-    setAddCards(size.width > 820 ? 3 : 2);
+    if (size.width > 820) {
+      setMaxCards(() => 12);
+      setAddCards(() => 3);
+    } else if (size.width > 480) {
+      setMaxCards(() => 8);
+      setAddCards(() => 2);
+    } else {
+      setMaxCards(() => 5);
+      setAddCards(() => 2);
+    }
   }, [size]);
 
   useEffect(() => {
@@ -52,7 +60,7 @@ export const Movies = ({
   }, [savedMode, nothingFoundSaved, nothingFoundAll]);
 
   const handleShowMoreMovies = () => {
-    setCardsToDisplay(cardsToDisplay + addCards);
+    setCardsToDisplay(() => maxCards + addCards);
   };
 
   useEffect(() => {
@@ -80,6 +88,8 @@ export const Movies = ({
         savedMode={savedMode}
         onSubmit={onSubmit}
         alternativeInput={alternativeInput}
+        setCardsToDisplay={setCardsToDisplay}
+        maxCards={maxCards}
       />
       <Section className={styles.cards}>
         <div className={styles.cardList}>
@@ -130,7 +140,7 @@ export const Movies = ({
           )}
         </div>
 
-        {allToDisplay && allToDisplay.length > 0 && !savedMode ? (
+        {allToDisplay && allToDisplay.length > maxCards && !savedMode ? (
           <button
             className={styles.cardList__button}
             type="button"

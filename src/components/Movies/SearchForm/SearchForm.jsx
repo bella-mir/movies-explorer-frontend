@@ -9,6 +9,8 @@ export const SearchForm = ({
   setIncludeShort,
   savedMode,
   onSubmit,
+  setCardsToDisplay,
+  maxCards,
 }) => {
   const controlInput = useForm();
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +34,7 @@ export const SearchForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setCardsToDisplay(maxCards);
 
     if (controlInput.values && controlInput.values.movie) {
       onSubmit(controlInput.values.movie);
