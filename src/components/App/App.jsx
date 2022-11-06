@@ -84,7 +84,7 @@ export const App = () => {
           localStorage.setItem("jwt", res.token);
         }
         setIsLoggedIn(true);
-        navigate("/movies");
+        setTimeout(() => navigate("/movies"), 500);
       })
       .catch((err) => {
         console.error(err);
