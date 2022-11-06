@@ -11,7 +11,11 @@ class MainApi {
   getSavedMovies() {
     return fetch(`${this._baseUrl}movies`, {
       method: "GET",
-      headers: { ...this._headers },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
     }).then((res) => {
       return this.checkResponse(res);
     });

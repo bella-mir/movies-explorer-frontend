@@ -83,8 +83,8 @@ export const App = () => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
         }
-        setIsLoggedIn(true);
         navigate("/movies");
+        setIsLoggedIn(true);
       })
       .catch((err) => {
         console.error(err);
