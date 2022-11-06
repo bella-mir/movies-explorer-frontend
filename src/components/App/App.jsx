@@ -49,6 +49,7 @@ export const App = () => {
         .getSavedMovies()
         .then((data) => {
           setSavedMovies(data.data);
+          setSearchSavedMovies(data.data);
           setShortSavedMovies(() => findShortMovies(data.data));
         })
         .catch((err) => {

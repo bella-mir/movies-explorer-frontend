@@ -31,10 +31,10 @@ export const Movies = ({
   const [cardsToDisplay, setCardsToDisplay] = useState(maxCards);
 
   const [allToDisplay, setAllToDisplay] = useState({ ...displayMovies });
-  const [savedToDisplay, setSavedToDisplay] = useState({ ...savedMovies });
+  const [savedToDisplay, setSavedToDisplay] = useState({ ...savedSearchMovies });
   const [notFoundText, setNotFoundText] = useState("");
 
-  useEffect(() => {}, [savedMovies]);
+  useEffect(() => {}, [savedSearchMovies]);
 
   useEffect(() => {
     setMaxCards(size.width > 820 ? 12 : size.width > 480 ? 8 : 5);
@@ -61,14 +61,14 @@ export const Movies = ({
       setSavedToDisplay(() => shortSavedMovies);
     } else {
       setAllToDisplay(() => displayMovies);
-      setSavedToDisplay(() => savedMovies);
+      setSavedToDisplay(() => savedSearchMovies);
     }
   }, [
     includeShort,
     displayMovies,
     shortMovies,
     shortSavedMovies,
-    savedMovies,
+    savedSearchMovies,
     savedMode,
   ]);
 
@@ -130,7 +130,7 @@ export const Movies = ({
           )}
         </div>
 
-        {(allToDisplay && allToDisplay.length > maxCards) & !savedMode ? (
+        {(allToDisplay && allToDisplay.length > maxCards) && !savedMode ? (
           <button
             className={styles.cardList__button}
             type="button"
