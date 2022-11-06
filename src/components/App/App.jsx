@@ -60,7 +60,7 @@ export const App = () => {
         setIncludeShort(JSON.parse(localStorage.getItem("checkbox")));
       }
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
@@ -84,7 +84,7 @@ export const App = () => {
           localStorage.setItem("jwt", res.token);
         }
         setIsLoggedIn(true);
-        setTimeout(() => navigate("/movies"), 500);
+        navigate("/movies");
       })
       .catch((err) => {
         console.error(err);

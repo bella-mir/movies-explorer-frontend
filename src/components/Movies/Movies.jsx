@@ -34,6 +34,8 @@ export const Movies = ({
   const [savedToDisplay, setSavedToDisplay] = useState({ ...savedMovies });
   const [notFoundText, setNotFoundText] = useState("");
 
+  useEffect(() => {}, [savedMovies]);
+
   useEffect(() => {
     setMaxCards(size.width > 820 ? 12 : size.width > 480 ? 8 : 5);
     setAddCards(size.width > 820 ? 3 : 2);
