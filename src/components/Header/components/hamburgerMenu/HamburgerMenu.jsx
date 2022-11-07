@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./hamburger-menu.module.scss";
 
 export const HamburgerMenu = () => {
@@ -32,22 +32,22 @@ export const HamburgerMenu = () => {
       <span></span>
       <ul className={styles.burger__menu}>
         <div className={styles.burger__menublock}>
-          <Link className={styles.burger__menuLink} to="/">
+          <NavLink className={styles.burger__menuLink} to="/">
             Главная
-          </Link>
-          <Link className={styles.burger__menuLink} to="/movies">
+          </NavLink>
+          <NavLink className={styles.burger__menuLink} to="/movies">
             Фильмы
-          </Link>
-          <Link className={styles.burger__menuLink} to="/saved-movies">
+          </NavLink>
+          <NavLink className={styles.burger__menuLink} to="/saved-movies">
             Сохраненные фильмы
-          </Link>
+          </NavLink>
         </div>
         <div className={styles.burger__menublock}>
-          <Link className={styles.burger__menuLink} to="/profile">
+          <NavLink className={styles.burger__menuLink} to="/profile">
             <button type="button" className={styles.burger__button_biege}>
               Аккаунт
             </button>
-          </Link>
+          </NavLink>
         </div>
       </ul>
     </div>

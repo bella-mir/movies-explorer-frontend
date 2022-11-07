@@ -19,6 +19,12 @@ export const Profile = ({ handleLogout }) => {
   useEffect(() => {
     if (editingMode) {
       !controlInput.values ? setSaveDisabled(true) : setSaveDisabled(false);
+      if (controlInput.values) {
+        const { name, mail } = controlInput.values;
+        currentUser.data.name === name || currentUser.data.email === mail
+          ? setSaveDisabled(true)
+          : setSaveDisabled(false);
+      }
     } else {
       setSaveDisabled(false);
     }

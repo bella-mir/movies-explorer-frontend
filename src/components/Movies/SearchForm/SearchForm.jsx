@@ -7,6 +7,8 @@ import styles from "./searchForm.module.scss";
 export const SearchForm = ({
   includeShort,
   setIncludeShort,
+  includeShortSaved,
+  setIncludeShortSaved,
   savedMode,
   onSubmit,
   setCardsToDisplay,
@@ -14,7 +16,6 @@ export const SearchForm = ({
 }) => {
   const controlInput = useForm();
   const [errorMessage, setErrorMessage] = useState("");
-  const [alternativeInput, setAlternativeInput] = useState("");
 
   useEffect(() => {
     setErrorMessage("");
@@ -22,13 +23,17 @@ export const SearchForm = ({
 
   useEffect(() => {
     if (savedMode) {
-      setAlternativeInput(() => "");
+      controlInput.setValues({
+        movie: "",
+      });
     } else {
       const savedSearch = localStorage.getItem("searchKeyword")
         ? localStorage.getItem("searchKeyword")
         : "";
 
-      setAlternativeInput(() => savedSearch);
+      controlInput.setValues({
+        movie: savedSearch,
+      });
     }
   }, [savedMode]);
 
@@ -53,9 +58,7 @@ export const SearchForm = ({
           placeholder="Фильм"
           className={styles.search__input}
           onChange={controlInput.handleChange}
-          value={
-            controlInput.values ? controlInput.values.movie : alternativeInput
-          }
+          value={controlInput.values ? controlInput.values.movie : ""}
         />
         <button className={styles.search__button} type="submit"></button>
       </form>
@@ -65,6 +68,9 @@ export const SearchForm = ({
         <ToggleSwitch
           includeShort={includeShort}
           setIncludeShort={setIncludeShort}
+          includeShortSaved={includeShortSaved}
+          setIncludeShortSaved={setIncludeShortSaved}
+          savedMode={savedMode}
         />
 
         <span className={styles.search__condition}>Короткометражки</span>

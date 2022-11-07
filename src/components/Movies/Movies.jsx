@@ -4,6 +4,15 @@ import { MoviesCard } from "./MoviesCard/MoviesCard";
 import { Preloader } from "../General/Preloader/Preloader";
 import { Section } from "../General";
 import useWindowSize from "../../hooks/useWindowSize";
+import {
+  LargePageWidth,
+  LagePageMoviesLoad,
+  MediumPageWidth,
+  MediumSmallPageMoviesLoad,
+  MediumPageMoviesVisible,
+  SmallPageMoviesVisible,
+  LagePageMoviesVisible,
+} from "./movies-constants";
 import styles from "./movies.module.scss";
 
 export const Movies = ({
@@ -21,11 +30,13 @@ export const Movies = ({
   shortSavedMovies,
   nothingFoundAll,
   nothingFoundSaved,
+  includeShortSaved,
+  setIncludeShortSaved,
 }) => {
   const size = useWindowSize();
 
-  const [maxCards, setMaxCards] = useState(12);
-  const [addCards, setAddCards] = useState(4);
+  const [maxCards, setMaxCards] = useState(LagePageMoviesVisible);
+  const [addCards, setAddCards] = useState(LagePageMoviesLoad);
   const [cardsToDisplay, setCardsToDisplay] = useState(maxCards);
 
   const [allToDisplay, setAllToDisplay] = useState({ ...displayMovies });
@@ -37,17 +48,25 @@ export const Movies = ({
   useEffect(() => {}, [size.width, savedSearchMovies]);
 
   useEffect(() => {
-    if (size.width > 820) {
-      setMaxCards(() => 12);
-      setAddCards(() => 3);
-    } else if (size.width > 480) {
-      setMaxCards(() => 8);
-      setAddCards(() => 2);
+    if (size.width > LargePageWidth) {
+      setMaxCards(() => LagePageMoviesVisible);
+      setAddCards(() => LagePageMoviesLoad);
+    } else if (size.width > MediumPageWidth) {
+      setMaxCards(() => MediumPageMoviesVisible);
+      setAddCards(() => MediumSmallPageMoviesLoad);
     } else {
-      setMaxCards(() => 5);
-      setAddCards(() => 2);
+      setMaxCards(() => SmallPageMoviesVisible);
+      setAddCards(() => MediumSmallPageMoviesLoad);
     }
-  }, [size]);
+  }, [
+    size,
+    LargePageWidth,
+    LagePageMoviesLoad,
+    MediumPageWidth,
+    MediumPageMoviesVisible,
+    MediumSmallPageMoviesLoad,
+    SmallPageMoviesVisible,
+  ]);
 
   useEffect(() => {
     if (savedMode & nothingFoundSaved) {
@@ -60,25 +79,24 @@ export const Movies = ({
   }, [savedMode, nothingFoundSaved, nothingFoundAll]);
 
   const handleShowMoreMovies = () => {
-    setCardsToDisplay(() => maxCards + addCards);
+    setCardsToDisplay(() => cardsToDisplay + addCards);
   };
+
+  useEffect(() => {
+    if (includeShortSaved) {
+      setSavedToDisplay(() => shortSavedMovies);
+    } else {
+      setSavedToDisplay(() => savedSearchMovies);
+    }
+  }, [includeShortSaved, shortSavedMovies, savedSearchMovies]);
 
   useEffect(() => {
     if (includeShort) {
       setAllToDisplay(() => shortMovies);
-      setSavedToDisplay(() => shortSavedMovies);
     } else {
       setAllToDisplay(() => displayMovies);
-      setSavedToDisplay(() => savedSearchMovies);
     }
-  }, [
-    includeShort,
-    displayMovies,
-    shortMovies,
-    shortSavedMovies,
-    savedSearchMovies,
-    savedMode,
-  ]);
+  }, [includeShort, displayMovies, shortMovies]);
 
   return (
     <>
@@ -90,6 +108,8 @@ export const Movies = ({
         alternativeInput={alternativeInput}
         setCardsToDisplay={setCardsToDisplay}
         maxCards={maxCards}
+        includeShortSaved={includeShortSaved}
+        setIncludeShortSaved={setIncludeShortSaved}
       />
       <Section className={styles.cards}>
         <div className={styles.cardList}>

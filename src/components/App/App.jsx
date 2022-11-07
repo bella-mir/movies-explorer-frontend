@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/userContext";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
@@ -17,8 +23,10 @@ import styles from "./app.module.scss";
 
 export const App = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentUser, setCurrentUser] = useState({});
   const [includeShort, setIncludeShort] = useState(false);
+  const [includeShortSaved, setIncludeShortSaved] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [savedSearchMovies, setSearchSavedMovies] = useState([]);
@@ -33,7 +41,7 @@ export const App = () => {
 
   useEffect(() => {
     tokenCheck();
-  }, [isLoggedIn]);
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -59,6 +67,7 @@ export const App = () => {
       if (JSON.parse(localStorage.getItem("filteredMovies"))) {
         setDisplayMovies(JSON.parse(localStorage.getItem("filteredMovies")));
         setIncludeShort(JSON.parse(localStorage.getItem("checkbox")));
+        setShortMovies(JSON.parse(localStorage.getItem("filteredSavedMovies")));
       }
     }
   }, [isLoggedIn, navigate]);
@@ -70,6 +79,7 @@ export const App = () => {
         .then((data) => {
           if (data) {
             setIsLoggedIn(true);
+            navigate(location.pathname);
           }
         })
         .catch((err) => {
@@ -174,6 +184,7 @@ export const App = () => {
         setNothingFoundAll(() => true);
       }
       localStorage.setItem("filteredMovies", JSON.stringify(searchResult));
+      localStorage.setItem("filteredSavedMovies", JSON.stringify(shortMovies));
       localStorage.setItem("searchKeyword", searchName);
       localStorage.setItem("checkbox", includeShort);
       setTimeout(() => setIsLoading(false), 1500);
@@ -218,6 +229,8 @@ export const App = () => {
                     displayMovies={displayMovies}
                     includeShort={includeShort}
                     setIncludeShort={setIncludeShort}
+                    includeShortSaved={includeShortSaved}
+                    setIncludeShortSaved={setIncludeShortSaved}
                     isLoading={isLoading}
                     savedMode={false}
                     searchName={localStorage.getItem("searchKeyword")}
@@ -240,6 +253,8 @@ export const App = () => {
                     savedSearchMovies={savedSearchMovies}
                     includeShort={includeShort}
                     setIncludeShort={setIncludeShort}
+                    includeShortSaved={includeShortSaved}
+                    setIncludeShortSaved={setIncludeShortSaved}
                     savedMode={true}
                     isLoading={isLoading}
                     displayMovies={displayMovies}

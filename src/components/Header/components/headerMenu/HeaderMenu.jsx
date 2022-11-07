@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styles from "./header-menu.module.scss";
 import { HeaderContent } from "../headerContent/HeaderContent";
 
@@ -14,14 +14,14 @@ export const HeaderMenu = (props) => {
         <HeaderContent />
       ) : (
         <div className={styles.header__menu}>
-          <Link className={styles.header__menuLink} to="/signup">
+          <NavLink className={styles.header__menuLink} to="/signup">
             Регистрация
-          </Link>
-          <Link className={styles.header__menuLink} to="/signin">
+          </NavLink>
+          <NavLink className={styles.header__menuLink} to="/signin">
             <button type="button" className={styles.header__button}>
               Войти
             </button>
-          </Link>
+          </NavLink>
         </div>
       )}
     </>
