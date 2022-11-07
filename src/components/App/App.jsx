@@ -159,6 +159,7 @@ export const App = () => {
           setShortMovies(shortMovies);
           setDisplayMovies(() => searchResult);
           localStorage.setItem("filteredMovies", JSON.stringify(searchResult));
+          localStorage.setItem("filteredSavedMovies", JSON.stringify(shortMovies));
           localStorage.setItem("searchKeyword", searchName);
           localStorage.setItem("checkbox", includeShort);
           setTimeout(() => setIsLoading(false), 1500);
