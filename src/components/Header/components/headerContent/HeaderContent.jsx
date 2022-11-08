@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./header-content.module.scss";
 import useWindowSize from "../../../../hooks/useWindowSize";
 import { HamburgerMenu } from "../hamburgerMenu/HamburgerMenu";
@@ -13,15 +13,17 @@ export const HeaderContent = () => {
         <HamburgerMenu />
       ) : (
         <div className={styles.header__menu}>
-          <Link className={styles.header__menuLink} to="/movies">
+          <NavLink className={styles.header__menuLink} to="/movies">
             Фильмы
-          </Link>
-          <Link className={styles.header__menuLink} to="/saved-movies">
+          </NavLink>
+          <NavLink className={styles.header__menuLink} to="/saved-movies">
             Сохраненные фильмы
-          </Link>
-          <Link className={styles.header__menuLink} to="/profile">
-            <button type="button" className={styles.header__button_biege}>Аккаунт</button>
-          </Link>
+          </NavLink>
+          <NavLink className={styles.header__menuLink} to="/profile">
+            <button type="button" className={styles.header__button_biege}>
+              Аккаунт
+            </button>
+          </NavLink>
         </div>
       )}
     </>

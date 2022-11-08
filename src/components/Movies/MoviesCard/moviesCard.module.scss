@@ -24,6 +24,11 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
+  max-height: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
 }
 
 .card__duration {

@@ -12,11 +12,11 @@ export const AboutMe = () => {
           <div className={styles.about__text}>
             <h3 className={styles.about__name}>Белла</h3>
             <p className={styles.about__occupation}>
-              Фронтенд-разработчик, 24 года
+              Фронтенд-разработчик, 25 лет
             </p>
             <p className={styles.about__description}>
               Я занимаюсь городскими исследованиями, аналитикой городских
-              пространстыенных данных и фронтент разработкой веб-гис приложений.
+              пространственных данных и фронтент разработкой веб-гис приложений.
             </p>
           </div>
           <a
@@ -26,11 +26,7 @@ export const AboutMe = () => {
             Github
           </a>
         </div>
-        <img
-          src={photo}
-          className={styles.about__photo}
-          alt="BellaS face"
-        />
+        <img src={photo} className={styles.about__photo} alt="BellaS face" />
       </div>
     </Section>
   );

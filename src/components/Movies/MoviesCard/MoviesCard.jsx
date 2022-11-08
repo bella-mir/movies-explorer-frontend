@@ -1,36 +1,89 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { mainApi } from "../../../utils/MainApi";
 import styles from "./moviesCard.module.scss";
 import classnames from "classnames";
 
-export const MoviesCard = (props) => {
+export const MoviesCard = ({
+  movie,
+  savedMode,
+  setSavedMovies,
+  savedMovies,
+}) => {
+  const hours = parseInt(movie.duration / 60);
+  const minutes = movie.duration % 60;
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    setIsSaved(() => savedMovies.some((m) => m.movieId === movie.id));
+  }, [savedMovies]);
+
+  const handleSaveMovie = (movie) => {
+    mainApi
+      .addMovie(movie)
+      .then((data) => {
+        setSavedMovies([data.data, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleDeleteMovie = (movie) => {
+    const savedMovie = savedMode
+      ? savedMovies.find((m) => m.movieId === movie.movieId)
+      : savedMovies.find((m) => m.movieId === movie.id);
+
+    mainApi
+      .deleteMovie(savedMovie._id)
+      .then(() => {
+        const newSavedMovies = savedMovies.filter(
+          (movie) => movie._id !== savedMovie._id
+        );
+        setSavedMovies(newSavedMovies);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <div className={styles.card}>
-      <img
-        className={styles.card__picture}
-        alt="Film Description"
-        src={
-          "https://s3-alpha-sig.figma.com/img/90ba/2e4b/e072f3f38937c7f5d592d64f3fa59f33?Expires=1665360000&Signature=QF2S0GGoVPvuMaiZqULOx6d0rmKlUcTzFsD92IoUX-kJVhGdDgXJgYEbq4n2STJQwNJMdxd7rwkXh-yhYC4rBmNXSpSsI8UQzTsald28rEWPe12WYaywEy9~SpHKJRcca4JPvW9xnywN9JNIP6M3MyJ5QyVfOA3~VwjLd-WxuK359zPU5jx1eZgyfVv97GxptMwpAAgI6~-ufnFKDR50aY2Mz~MfoNtO3GSM9E2VnwWnWPs3Nt7eJSCf9VzR9tOnAk6rY3RcE9EAKYotuXB5EjRu929TSSSFNvlVSrcDOn8YPIx3CSb8IxQBBbEWhW6Wduk0tzmeJTMT4Up6ETaPqw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-        }
-      />
+      <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
+        <img
+          className={styles.card__picture}
+          alt={movie.nameRU}
+          src={
+            !savedMode
+              ? `https://api.nomoreparties.co/${movie.image.url}`
+              : movie.image
+          }
+        />
+      </a>
       <div className={styles.card__header}>
-        <h3 className={styles.card__title}>33 слова о дизайне</h3>
-        {!props.savedMode ? (
+        <h3 className={styles.card__title}>{movie.nameRU}</h3>
+        {!savedMode ? (
           <button
             type="button"
             className={classnames(
               styles.card__button,
-              props.saved && styles.card__saved,
-              !props.saved && styles.card__unsaved
+              isSaved && styles.card__saved,
+              !isSaved && styles.card__unsaved
             )}
+            onClick={() => {
+              isSaved ? handleDeleteMovie(movie) : handleSaveMovie(movie);
+            }}
           ></button>
         ) : (
           <button
             type="button"
             className={classnames(styles.card__button, styles.card__delete)}
+            onClick={() => handleDeleteMovie(movie)}
           ></button>
         )}
       </div>
-      <p className={styles.card__duration}>1ч42м</p>
+      <p className={styles.card__duration}>
+        `{hours}ч{minutes}м`
+      </p>
     </div>
   );
 };

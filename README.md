@@ -4,6 +4,10 @@
 
 Front-end part of the application `Movies Explorer`.
 
+Visit the [web-page](https://movies.bellamir.nomoredomains.sbs/)
+
+[Pull request](https://github.com/belka-mironova/movies-explorer-frontend/pull/4)
+
 **Description**
 
 Will be here soon :)

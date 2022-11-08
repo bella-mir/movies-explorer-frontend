@@ -41,6 +41,10 @@
   background-color: transparent;
 }
 
+.profile__editing[disabled]:hover {
+  cursor: not-allowed;
+}
+
 .profile__editing:hover {
   opacity: 0.7;
   cursor: pointer;
@@ -54,6 +58,14 @@
   gap: 16px;
 }
 
+.profile__infoMessage {
+  font-size: 13px;
+  line-height: 16px;
+  margin-top: 40px;
+  color: #3456f3;
+  min-height: 16px;
+}
+
 .profile__logout {
   margin: 0 auto;
   font-weight: 500;
@@ -61,16 +73,36 @@
   line-height: 16px;
   text-decoration: none;
   color: #ee3465;
+  border: none;
+  background: none;
+}
+
+.profile__logout:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .profile__logout:hover {
   opacity: 0.7;
 }
 
+.profile__info {
+  background: none;
+  border: none;
+  text-align: right;
+  font-style: italic;
+}
+
+.profile__info:disabled {
+  font-style: normal;
+}
+
+.profile__info:focus {
+  outline: none;
+}
 
 @media (max-width: 550px) {
-  .profile__data{
+  .profile__data {
     width: 260px;
   }
-
 }
