@@ -11,7 +11,7 @@ Visit the [web-page](https://movies.bellamir.nomoredomains.sbs/)
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/belka-mironova/movies-explorer-frontend.git
+   git clone https://github.com/bella-mir/movies-explorer-frontend.git
    ```
 2. Install NPM packages
    ```sh
